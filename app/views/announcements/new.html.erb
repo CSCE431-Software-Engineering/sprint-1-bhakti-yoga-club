@@ -1,11 +1,12 @@
-<h1>Make Announcement</h1>
+<!-- app/views/announcements/new.html.erb -->
+<h1>New Announcement</h1>
 
-<form>
+<%= form_with(model: @announcement, url: announcements_path, method: :post) do |form| %>
   <div>
-    <label for="announcement_content">Content:</label>
-    <textarea id="announcement_content" name="announcement[content]" placeholder="Enter announcement content" rows="5"></textarea>
+    <%= form.text_area :message_text, placeholder: 'Enter announcement content', rows: 5 %>
   </div>
+
   <div>
-    <input type="submit" value="Send Announcement">
+    <%= form.submit 'Create Announcement' %>
   </div>
-</form>
+<% end %>

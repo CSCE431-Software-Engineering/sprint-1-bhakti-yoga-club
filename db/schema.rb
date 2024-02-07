@@ -17,11 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_07_032038) do
   create_table "announcements", force: :cascade do |t|
     t.text "message_text"
     t.datetime "message_date"
-    t.bigint "event_id", null: false
     t.bigint "member_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_announcements_on_event_id"
     t.index ["member_id"], name: "index_announcements_on_member_id"
   end
 
@@ -72,7 +68,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_07_032038) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "announcements", "events"
   add_foreign_key "announcements", "members"
   add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "members"
