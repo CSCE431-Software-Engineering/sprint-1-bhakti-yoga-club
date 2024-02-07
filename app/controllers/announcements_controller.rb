@@ -15,7 +15,7 @@ class AnnouncementsController < ApplicationController
         @announcement = Announcement.new(announcement_params)
 
         @announcement.member_id = 1
-        @announcement.message_date = Time.current
+        @announcement.message_date = Time.current.in_time_zone('Central Time (US & Canada)')
 
 
         respond_to do |format|
