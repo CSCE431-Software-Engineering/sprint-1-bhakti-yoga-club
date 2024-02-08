@@ -3,6 +3,10 @@
 
 <%= form_with(model: @announcement, url: announcements_path, method: :post) do |form| %>
   <div>
+    <%= form.text_field :message_title, placeholder: 'Enter announcement title' %>
+  </div>
+  
+  <div>
     <%= form.text_area :message_text, placeholder: 'Enter announcement content', rows: 5 %>
   </div>
 

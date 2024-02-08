@@ -10,6 +10,10 @@ class AnnouncementsController < ApplicationController
 
     end
 
+    def show
+        @announcement = Announcement.find(params[:id])
+    end
+
 
     def create
         @announcement = Announcement.new(announcement_params)
@@ -33,7 +37,7 @@ class AnnouncementsController < ApplicationController
     private
   
     def announcement_params
-      params.require(:announcement).permit(:message_text, :message_date, :member_id)
+      params.require(:announcement).permit(:message_title, :message_text, :message_date, :member_id)
     end
   
   end

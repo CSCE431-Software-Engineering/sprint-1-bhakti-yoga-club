@@ -6,10 +6,8 @@
 <ul>
   <% @announcements.each do |announcement| %>
     <li>
-      <strong><%= announcement.message_date.strftime('%Y-%m-%d %H:%M:%S') %>:</strong>
-      <%= announcement.message_text %>
+      <%= link_to announcement.message_title, announcement_path(announcement) %>
       <br>
-      <strong>Member ID:</strong> <%= announcement.member_id %>
     </li>
   <% end %>
 </ul>

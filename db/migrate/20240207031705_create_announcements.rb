@@ -2,6 +2,7 @@
 class CreateAnnouncements < ActiveRecord::Migration[7.0]
   def change
     create_table :announcements do |t|
+      t.text :message_title
       t.text :message_text
       t.datetime :message_date
       t.bigint :member_id, null: false

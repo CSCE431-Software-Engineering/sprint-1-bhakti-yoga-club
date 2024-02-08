@@ -15,6 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_07_032038) do
   enable_extension "plpgsql"
 
   create_table "announcements", force: :cascade do |t|
+    t.text "message_title"
     t.text "message_text"
     t.datetime "message_date"
     t.bigint "member_id", null: false
