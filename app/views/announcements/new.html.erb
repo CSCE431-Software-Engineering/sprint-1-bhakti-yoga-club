@@ -3,13 +3,21 @@
 
 <%= form_with(model: @announcement, url: announcements_path, method: :post) do |form| %>
   <div>
-    <%= form.text_field :message_title, placeholder: 'Enter announcement title' %>
+    <%= form.label :Title %>
   </div>
-  
+  <br>
   <div>
-    <%= form.text_area :message_text, placeholder: 'Enter announcement content', rows: 5 %>
+    <%= form.text_field :message_title, placeholder: 'Add title' %>
   </div>
-
+  <br>
+  <div>
+    <%= form.label :Description %>
+  </div>
+  <br>
+  <div>
+    <%= form.text_area :message_text, placeholder: 'Add description', rows: 5 %>
+  </div>
+  <br>
   <div>
     <%= form.submit 'Create Announcement' %>
   </div>
