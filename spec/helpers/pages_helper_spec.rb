@@ -11,5 +11,8 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe PagesHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "generates a welcome message" do
+    welcome_message = helper.generate_welcome_message
+    expect(welcome_message).to include("Welcome to our website!")
+  end
 end

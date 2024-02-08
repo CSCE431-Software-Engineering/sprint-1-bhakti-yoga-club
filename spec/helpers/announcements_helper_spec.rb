@@ -11,5 +11,9 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe AnnouncementsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "formats announcement text" do
+    announcement = double("Announcement", message_text: "Hello, world!")
+    formatted_text = helper.format_announcement_text(announcement)
+    expect(formatted_text).to eq("<p>Hello, world!</p>")
+  end
 end
