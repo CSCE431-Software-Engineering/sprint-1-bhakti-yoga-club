@@ -1,0 +1,16 @@
+<!-- app/views/announcements/index.html.erb -->
+<%= link_to 'Back', root_path %>
+
+<h1>Announcement Log</h1>
+
+<%= link_to 'Make Announcement', new_announcement_path %>
+
+<ul>
+  <% @announcements.each do |announcement| %>
+    <li>
+      <strong><%= announcement.message_date.strftime('%Y-%m-%d %H:%M:%S') %>:</strong>
+      <%= link_to announcement.message_title, announcement_path(announcement) %>
+      <br><br>
+    </li>
+  <% end %>
+</ul>
