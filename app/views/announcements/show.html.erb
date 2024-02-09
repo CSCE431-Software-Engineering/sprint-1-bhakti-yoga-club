@@ -1,0 +1,18 @@
+<!-- app/views/announcements/show.html.erb -->
+<h1>Announcement Details</h1>
+
+<p><strong>Date:</strong> <%= @announcement.message_date.strftime('%Y-%m-%d %H:%M:%S') %></p>
+<p><strong>Title:</strong> <%= @announcement.message_title %></p>
+<p><strong>Content:</strong> <%= @announcement.message_text %></p>
+
+
+<% if @announcement.member.present? %>
+  <h2>Member Information</h2>
+  <p><strong>Name:</strong> <%= @announcement.member.title %></p>
+  <p><strong>Email:</strong> <%= @announcement.member.email %></p>
+  <!-- Add any other member attributes you want to display -->
+<% else %>
+  <p>No member information available for this announcement.</p>
+<% end %>
+
+<%= link_to 'Back to Announcements', announcements_path %>

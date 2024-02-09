@@ -1,4 +1,8 @@
 class Announcement < ApplicationRecord
-	belongs_to :event
 	belongs_to :member
-end
+  
+	validates :message_title, presence: true
+	validates :message_text, presence: true
+	validates :message_date, presence: true
+  end
+  

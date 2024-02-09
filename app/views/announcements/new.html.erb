@@ -1,0 +1,26 @@
+<!-- app/views/announcements/new.html.erb -->
+<h1>New Announcement</h1>
+
+<%= form_with(model: @announcement, url: announcements_path, method: :post) do |form| %>
+  <div>
+    <%= form.label :Title %>
+  </div>
+  <br>
+  <div>
+    <%= form.text_field :message_title, placeholder: 'Add title' %>
+  </div>
+  <br>
+  <div>
+    <%= form.label :Description %>
+  </div>
+  <br>
+  <div>
+    <%= form.text_area :message_text, placeholder: 'Add description', rows: 5 %>
+  </div>
+  <br>
+  <div>
+    <%= form.submit 'Create' %>
+    <br><br>
+    <%= link_to 'Cancle', announcements_path %>
+  </div>
+<% end %>
