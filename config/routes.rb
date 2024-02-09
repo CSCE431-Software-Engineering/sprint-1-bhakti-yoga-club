@@ -1,6 +1,10 @@
+# config/routes.rb
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get 'announcements', to: 'announcements#index'
+  get 'announcements/new', to: 'announcements#new', as: 'new_announcement'
+  get 'announcements/:id', to: 'announcements#show', as: 'announcement'
+  post 'announcements', to: 'announcements#create'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  
+  root "pages#home"
 end
