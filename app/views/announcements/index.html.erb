@@ -10,6 +10,7 @@
     <li>
       <strong><%= announcement.message_date.strftime('%Y-%m-%d %H:%M:%S') %>:</strong>
       <%= link_to announcement.message_title, announcement_path(announcement) %>
+      <%= link_to 'Edit', edit_announcement_path(announcement) %>
       <br><br>
     </li>
   <% end %>

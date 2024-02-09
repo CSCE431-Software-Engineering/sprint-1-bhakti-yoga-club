@@ -1,0 +1,20 @@
+<!-- app/views/announcements/edit.html.erb -->
+<h1>Edit Announcement</h1>
+
+<%= form_with(model: @announcement, url: announcement_path(@announcement), method: :patch) do |form| %>
+  <div>
+    <%= form.text_field :message_title, placeholder: 'Enter announcement title' %>
+  </div>
+
+  <div>
+    <%= form.text_area :message_text, placeholder: 'Enter announcement content', rows: 5 %>
+  </div>
+
+  <div>
+    <%= form.submit 'Update Announcement' %>
+  </div>
+
+  <%= button_to "Delete", @announcement, method: :delete %>
+
+  <%= link_to 'Back', announcements_path, class: 'btn btn-secondary' %>
+<% end %>

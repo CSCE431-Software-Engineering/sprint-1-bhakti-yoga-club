@@ -33,6 +33,30 @@ class AnnouncementsController < ApplicationController
             end
         end
     end
+
+    def edit
+      @announcement = Announcement.find(params[:id])
+    end
+    
+    def update
+      @announcement = Announcement.find(params[:id])
+    
+      if @announcement.update(announcement_params)
+        redirect_to announcements_path, notice: 'Announcement updated successfully!'
+      else
+        render :edit
+      end
+    end
+    
+    def destroy
+      @announcement = Announcement.find(params[:id])
+      @announcement.destroy
+    
+      respond_to do |format|
+        format.html { redirect_to announcements_url, notice: 'Announcement was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    end
   
     private
   
