@@ -8,15 +8,21 @@ class MembersController < ApplicationController
   end
 
   def new
-    @member = Member.new
+    @member = Member.new(email: params[:email])
   end
 
   def create
     @member = Member.new(member_params)
     @member.date_joined = Date.today
 
-    if @member.save
-      redirect_to root_path, notice: "Sign Up successful. Welcome to Bhakti Yoga Club!"
+    existing_member = Member.find_by(email: @member.email)
+
+    if existing_member 
+      flash[:notice] = "Member with this email already exists."
+      redirect_to new_member_path(email: @member.email)
+    elsif @member.save
+      flash[:notice] = "Sign Up successful. Welcome to Bhakti Yoga Club!"
+      redirect_to root_path
     else
       render :new
     end
