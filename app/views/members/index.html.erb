@@ -1,0 +1,12 @@
+<h1>Members List</h1>
+
+<ul>
+  <% @members.each do |member| %>
+    <li>
+      <strong>Email:</strong> <%= member.email %>
+      <strong>Join Date:</strong> <%= member.date_joined %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back to Home', root_path %>
