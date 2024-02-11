@@ -1,12 +1,53 @@
+<style>
+  table {
+    width: auto;
+    max-width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    border: 1px solid grey;
+  }
+
+  th {
+    text-align: center;
+    width: auto;
+    border: 1px solid grey;
+  }
+
+  td {
+    border: 1px solid lightgrey;
+  }
+
+  td.email {
+    text-align: left;
+    width: auto;
+    padding: 0 25px;
+  }
+
+  td.join-date {
+    text-align: center;
+    width: auto;
+  }
+
+</style>
+
+
 <h1>Members List</h1>
 
-<ul>
-  <% @members.each do |member| %>
-    <li>
-      <strong>Email:</strong> <%= member.email %>
-      <strong>Join Date:</strong> <%= member.date_joined %>
-    </li>
-  <% end %>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th class="email">Email</th>
+      <th class="join-date">Join Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td class="email"><%= member.email %></td>
+        <td class="join-date"><%= member.date_joined %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Back to Home', root_path %>
