@@ -1,11 +1,12 @@
 <!-- app/views/announcements/new.html.erb -->
+
+<h1>Member Sign Up</h1>
+
 <% if flash[:notice] %>
   <div class="alert alert-success">
     <%= flash[:notice] %>
   </div>
 <% end %>
-
-<h1>Member Sign Up</h1>
 
 <%= form_with(model: @member, url: members_path, method: :post) do |form| %>
   <div>
@@ -15,6 +16,13 @@
   <div>
     <%= form.text_field :email, placeholder: 'example@example.com' %>
   </div><br>
+
+  <%# Display error message for email field if present %>
+  <% if @member.errors[:email].any? %>
+    <div class="alert alert-danger">
+      <%= @member.errors.full_messages_for(:email).first %>
+    </div>
+  <% end %>
 
   <div>
     <%= form.submit 'Sign Up' %><br><br>

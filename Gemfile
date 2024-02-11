@@ -87,3 +87,5 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 
 gem 'omniauth-rails_csrf_protection'
+
+gem 'validates_email_format_of'
