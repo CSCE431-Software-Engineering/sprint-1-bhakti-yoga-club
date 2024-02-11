@@ -11,19 +11,25 @@
     text-align: center;
     width: auto;
     border: 1px solid grey;
+    padding: 0 20px;
   }
 
   td {
     border: 1px solid lightgrey;
+    padding: 0 20px;
   }
 
   td.email {
     text-align: left;
     width: auto;
-    padding: 0 25px;
   }
 
   td.join-date {
+    text-align: center;
+    width: auto;
+  }
+  
+  td.member-actions {
     text-align: center;
     width: auto;
   }
@@ -38,6 +44,7 @@
     <tr>
       <th class="email">Email</th>
       <th class="join-date">Join Date</th>
+      <th class="member-actions">Member Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -45,6 +52,9 @@
       <tr>
         <td class="email"><%= member.email %></td>
         <td class="join-date"><%= member.date_joined %></td>
+        <td class="member-actions">
+          <%= link_to 'Edit', edit_member_path(member) %>
+          <%= link_to 'remove', delete_member_path(member) %></td>
       </tr>
     <% end %>
   </tbody>
