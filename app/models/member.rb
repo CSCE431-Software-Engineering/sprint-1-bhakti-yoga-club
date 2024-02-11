@@ -3,4 +3,12 @@ class Member < ApplicationRecord
 
 	has_many :attendances
 	has_many :events, through: :attendances
+
+	private
+
+	def check_email_format
+    unless ValidatesEmailFormatOf.validates_email_format(email)
+      errors.add(:email, "is not valid")
+    end
+  end
 end

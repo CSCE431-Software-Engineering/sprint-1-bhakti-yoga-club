@@ -24,7 +24,8 @@ class MembersController < ApplicationController
       flash[:notice] = "Sign Up successful. Welcome to Bhakti Yoga Club!"
       redirect_to root_path
     else
-      render :new
+      flash[:notice] = "Invalid Email"
+      redirect_to new_member_path(email: @member.email)
     end
   end
 

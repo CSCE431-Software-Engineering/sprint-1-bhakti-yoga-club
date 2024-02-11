@@ -2,12 +2,6 @@
 
 <h1>Member Sign Up</h1>
 
-<% if flash[:notice] %>
-  <div class="alert alert-success">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-
 <%= form_with(model: @member, url: members_path, method: :post) do |form| %>
   <div>
     <strong><%= form.label :email %></strong>
@@ -15,14 +9,15 @@
 
   <div>
     <%= form.text_field :email, placeholder: 'example@example.com' %>
-  </div><br>
+  </div>
 
-  <%# Display error message for email field if present %>
-  <% if @member.errors[:email].any? %>
-    <div class="alert alert-danger">
-      <%= @member.errors.full_messages_for(:email).first %>
+  <% if flash[:notice] %>
+    <div class="alert alert-success" style="color: red;">
+      <%= flash[:notice] %>
     </div>
   <% end %>
+
+  <br>
 
   <div>
     <%= form.submit 'Sign Up' %><br><br>
