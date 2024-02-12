@@ -1,0 +1,42 @@
+<!-- app/views/attendances/new.html.erb -->
+<h1>New Attendance Item</h1>
+
+<%= form_with(model: @attendance, url: attendances_path, method: :post) do |form| %>
+  <div>
+    <%= form.label :member_id 'Member ID' %>
+  </div>
+  <br>
+  <div>
+    <%= form.text_field :member_id, placeholder: 'Add Member\'s ID' %>
+  </div>
+  <br>
+  <div>
+    <%= form.label :event_id 'Event ID' %>
+  </div>
+  <br>
+  <div>
+    <%= form.text_field :event_id, placeholder: 'Add Event\'s ID' %>
+  </div>
+  <br>
+  <div>
+    <%= form.label :time_arrived 'Arrival Time' %>
+  </div>
+  <br>
+  <div>
+    <%= form.text_field :time_arrived, placeholder: 'Add Time of Arrival' %>
+  </div>
+  <br>
+  <div>
+    <%= form.label :time_departed 'Depart Time' %>
+  </div>
+  <br>
+  <div>
+    <%= form.text_field :time_departed, placeholder: 'Add Time of Departure' %>
+  </div>
+  <br>
+  <div>
+    <%= form.submit 'Create' %>
+    <br><br>
+    <%= link_to 'Cancel', attendances_path %>
+  </div>
+<% end %>
