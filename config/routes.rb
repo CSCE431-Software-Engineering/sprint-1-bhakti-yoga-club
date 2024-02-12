@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'announcements/:id', to: 'announcements#show', as: 'announcement'
   post 'announcements', to: 'announcements#create'
 
+  resources :events
   
   root "pages#home"
 end
