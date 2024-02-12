@@ -10,22 +10,12 @@ RSpec.describe AnnouncementsController, type: :controller do
     context 'when params[:id] is present' do
       it 'assigns the correct announcement' do
         
-        member = Member.create(
-          email: 'john.doe@example.com',
-          title: 'Mr.',
-          is_active_paid_member: true,
-          is_admin: false,
-          date_joined: Date.today,
-          date_left: nil 
-        )
-
-
         # Create an example announcement in the database
         announcement = Announcement.create(
           message_title: 'Test Title', 
           message_text: 'Test Text', 
           message_date: Time.current, 
-          member_id: member.id  
+          member_id: 1
         )
 
         # Manually set the params to include the correct announcement id
@@ -83,20 +73,11 @@ RSpec.describe AnnouncementsController, type: :controller do
   
   describe 'DELETE #destroy' do
 
-    member = Member.create(
-      email: 'john.doe@example.com',
-      title: 'Mr.',
-      is_active_paid_member: true,
-      is_admin: false,
-      date_joined: Date.today,
-      date_left: nil 
-    )
-
     announcement = Announcement.create(
       message_title: 'Test Title', 
       message_text: 'Test Text', 
       message_date: Time.current, 
-      member_id: member.id  
+      member_id: 1
     )
 
     it 'destroys the announcement' do
@@ -113,20 +94,11 @@ RSpec.describe AnnouncementsController, type: :controller do
 
   describe 'PATCH #update' do
 
-    member = Member.create(
-      email: 'john.doe@example.com',
-      title: 'Mr.',
-      is_active_paid_member: true,
-      is_admin: false,
-      date_joined: Date.today,
-      date_left: nil 
-    )
-
     announcement = Announcement.create(
       message_title: 'Test Title', 
       message_text: 'Test Text', 
       message_date: Time.current, 
-      member_id: member.id  
+      member_id: 1
     )
 
     context 'with valid parameters' do
@@ -136,7 +108,7 @@ RSpec.describe AnnouncementsController, type: :controller do
             message_title: 'Updated Title',
             message_text: 'Updated Text',
             message_date: Time.current,
-            member_id: member.id  
+            member_id: 1
           }
         }
       end
@@ -157,7 +129,7 @@ RSpec.describe AnnouncementsController, type: :controller do
             message_title: '', # Invalid title
             message_text: 'Updated Text',
             message_date: Time.current,
-            member_id: member.id  
+            member_id: 1
           }
         }
       end
@@ -179,20 +151,12 @@ RSpec.describe AnnouncementsController, type: :controller do
     context 'with valid parameters' do
 
       it 'creates a new announcement' do
-        membersa = Member.create(
-          email: 'john.doe@example.com',
-          title: 'Mr.',
-          is_active_paid_member: true,
-          is_admin: false,
-          date_joined: Date.today,
-          date_left: nil 
-        )
 
         announcement_params = {
           message_title: 'New Announcement',
           message_text: 'This is a test announcement.',
           message_date: Time.current,
-          member_id: membersa.id
+          member_id: 1
         }
 
   
@@ -207,14 +171,7 @@ RSpec.describe AnnouncementsController, type: :controller do
     end
 
     context 'with invalid parameters' do
-      member = Member.create(
-        email: 'john.doe@example.com',
-        title: 'Mr.',
-        is_active_paid_member: true,
-        is_admin: false,
-        date_joined: Date.today,
-        date_left: nil 
-      )
+
 
       let(:invalid_params) do
         {
@@ -222,7 +179,7 @@ RSpec.describe AnnouncementsController, type: :controller do
             message_title: '', # Invalid title
             message_text: 'Test Text',
             message_date: Time.current,
-            member_id: member.id
+            member_id: 1
           }
         }
       end
