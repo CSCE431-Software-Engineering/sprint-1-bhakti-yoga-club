@@ -1,7 +1,7 @@
 # app/controllers/announcements_controller.rb
 class AnnouncementsController < ApplicationController
 
-  # before_action :authenticate_member!, except: [:index, :show]
+  before_action :authenticate_member!, except: [:index, :show]
   before_action :set_announcement, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -22,7 +22,7 @@ class AnnouncementsController < ApplicationController
   def create
       @announcement = Announcement.new(announcement_params)
 
-      @announcement.member_id = 1
+      @announcement.member_id = current_member.id
       @announcement.message_date = Time.current.in_time_zone('Central Time (US & Canada)')
 
       respond_to do |format|

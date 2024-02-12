@@ -5,13 +5,15 @@
 <p><strong>Title:</strong> <%= @announcement.message_title %></p>
 <p><strong>Content:</strong> <%= @announcement.message_text %></p>
 
-<%= link_to 'Edit', edit_announcement_path %>
 
-<%= button_to "Delete", @announcement, method: :delete %>
+<% if member_signed_in? && current_member.is_admin? %>
+  <%= link_to 'Edit', edit_announcement_path %>
+  <%= button_to "Delete", @announcement, method: :delete %>
+<% end %>
 
 <% if @announcement.member.present? %>
   <h2>Member Information</h2>
-  <p><strong>Name:</strong> <%= @announcement.member.title %></p>
+  <p><strong>Name:</strong> <%= @announcement.member.full_name %></p>
   <p><strong>Email:</strong> <%= @announcement.member.email %></p>
   <!-- Add any other member attributes you want to display -->
 <% else %>
