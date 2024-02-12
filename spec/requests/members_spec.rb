@@ -9,7 +9,7 @@ RSpec.describe "Members", type: :request do
   end
 
   describe "GET /show" do
-    member = Member.create(email: "test@example.com")
+    member = Member.find_or_create_by(email: "test@example.com")
 
     it "returns http success" do
       get member_path(member)
