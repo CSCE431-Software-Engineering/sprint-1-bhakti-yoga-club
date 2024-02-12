@@ -1,4 +1,8 @@
 class MembersController < ApplicationController
+
+  before_action :require_admin, except: [:show, :destroy]
+  before_action :authorize_member_or_admin, only: [:show]
+
   def index
     @members = Member.order(email: :asc)
   end
@@ -18,13 +22,13 @@ class MembersController < ApplicationController
     existing_member = Member.find_by(email: @member.email)
 
     if existing_member 
-      flash[:notice] = "Member with this email already exists."
+      flash[:alert] = "Member with this email already exists."
       redirect_to new_member_path(email: @member.email)
     elsif @member.save
-      flash[:notice] = "Sign Up successful. Welcome to Bhakti Yoga Club!"
+      flash[:success] = "Sign Up successful. Welcome to Bhakti Yoga Club!"
       redirect_to root_path
     else
-      flash[:notice] = "Invalid Email"
+      flash[:alert] = "Invalid Email"
       redirect_to new_member_path(email: @member.email)
     end
   end
@@ -36,10 +40,10 @@ class MembersController < ApplicationController
   def update
     @member = Member.find(params[:id])
     if @member.update(member_update_params)
-      flash[:notice] = "Member successfully updated"
+      flash[:success] = "Member successfully updated"
       redirect_to members_path
     else
-      flash[:notice] = "Member update failed"
+      flash[:alert] = "Member update failed"
       redirect_to edit_member_path(@member)
     end
   end
@@ -49,14 +53,23 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    @member = Member.find(params[:id])
-    if @member.destroy
-      flash[:notice] = "Member deleted successfully"
+    # @member = Member.find(params[:id])
+    # if @member.destroy
+    #   flash[:notice] = "Member deleted successfully"
+    # else
+    #   flash[:notice] = "Member could not be deleted"
+    # end
+    # redirect_to members_path
+    if current_member
+      sign_out current_member
+      flash[:notice] = "You have been signed out."
     else
-      flash[:notice] = "Member could not be deleted"
+      flash[:alert] = "You are not signed in"
     end
-    redirect_to members_path
+    redirect_to root_path
   end
+
+  private
 
   def member_params
     params.require(:member).permit(:email)
@@ -69,6 +82,14 @@ class MembersController < ApplicationController
       :is_active_paid_member,
       :is_admin
       )
+  end
+
+  def authorize_member_or_admin
+    @member = Member.find(params[:id])
+    unless current_member == @member || current_member&.is_admin?
+      flash[:alert] = "You are not authorized to access this page."
+      redirect_to root_path
+    end
   end
 
 end

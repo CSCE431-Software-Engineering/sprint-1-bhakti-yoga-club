@@ -1,6 +1,8 @@
 # app/controllers/announcements_controller.rb
 class AnnouncementsController < ApplicationController
 
+    before_action :authenticate_member!, except: [:index, :show]
+
     def index
       @announcements = Announcement.order(message_date: :desc)
     end

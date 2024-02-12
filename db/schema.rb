@@ -61,7 +61,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_07_032038) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.string "email"
+    t.string "email", null: false
+    t.string "full_name"
     t.string "title", default: "DefaultMember"
     t.boolean "is_active_paid_member", default: false
     t.boolean "is_admin", default: false
@@ -69,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_07_032038) do
     t.date "date_left"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_members_on_email", unique: true
   end
 
   add_foreign_key "attendances", "events"

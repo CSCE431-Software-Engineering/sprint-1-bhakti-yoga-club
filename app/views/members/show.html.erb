@@ -1,10 +1,20 @@
 <h1>Member Information</h1>
 
-<strong>Member Email:</strong> <%= @member.email %><br />
+<strong>Full Name:</strong> <%= @member.full_name %><br />
+<strong>Email:</strong> <%= @member.email %><br />
 <strong>Date Joined:</strong> <%= @member.date_joined %><br />
-<strong>Member Title:</strong> <%= @member.title %><br />
-<strong>Paid Member Status:</strong> <%= @member.is_active_paid_member %><br />
+<% if current_member&.is_admin? %>
+    <strong>Member Title:</strong> <%= @member.title %><br />
+    <strong>Date Left:</strong> <%= @member.date_left %><br />
+<% end %>
+<strong>Paid Status:</strong> <%= @member.is_active_paid_member %><br />
 
 <br />
 
-<%= link_to "Back to Members", members_path %>
+<% if member_signed_in? %>
+  <% if current_member.is_admin? %>
+    <%= link_to "Back to Members", members_path %>
+  <% end %>
+<% end %>
+
+<%= link_to "Back to Home", root_path %>

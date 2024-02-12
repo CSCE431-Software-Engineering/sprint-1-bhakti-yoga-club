@@ -1,6 +1,9 @@
 # config/routes.rb
 Rails.application.routes.draw do
-  get 'announcements', to: 'announcements#index'
+  
+  root "pages#home"
+
+  get 'announcements', to: 'announcements#index', as: 'announcements'
   get 'announcements/new', to: 'announcements#new', as: 'new_announcement'
   get 'announcements/:id', to: 'announcements#show', as: 'announcement'
   post 'announcements', to: 'announcements#create'
@@ -14,6 +17,9 @@ Rails.application.routes.draw do
   delete 'members/:id', to: 'members#destroy', as: 'delete_member'
   get 'members/:id', to: 'members#show', as: 'member'
 
-  
-  root "pages#home"
+  devise_for :members, controllers: { omniauth_callbacks: 'members/omniauth_callbacks' }
+  devise_scope :member do
+    get 'members/sign_in', to: 'members/sessions#new', as: :new_member_session
+    delete 'members/sign_out', to: 'members/sessions#destroy', as: :destroy_member_session
+  end
 end

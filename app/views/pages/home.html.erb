@@ -1,15 +1,28 @@
 <!-- app/views/pages/home.html.erb -->
-<% if flash[:notice] %>
-  <div class="alert alert-success" style="color: green;">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
 
 <h1>Welcome to My Club</h1>
 
 <p>This is the home page of our club website.</p>
 
 <%= link_to 'Announcements', announcements_path %> <br />
-<%= link_to 'Sign-Up', new_member_path %> <br />
-<%= link_to 'Members (temporary)', members_path %>
 
+<% if member_signed_in? %>
+  <% if current_member.is_admin? %>
+    <%= link_to 'View Members', members_path %> <!-- Corrected syntax -->
+  <% end %>
+<% end %>
+
+<!-- DEPRECATED Sign-Up now uses OAuth: <%= link_to 'Sign-Up', new_member_path %> <br /> -->
+
+
+<!-- FUNCTION MOVED TO APPLICATION.HTML.ERB for the time being less repeated code
+
+  <% if member_signed_in? %>
+    <%= button_to "Sign Out", destroy_member_session_path, method: :delete, class: "btn btn-danger" %>
+  <% else %>
+    <%= button_to member_google_oauth2_omniauth_authorize_path, class: "btn btn-danger", method: :post, data: {turbo: "false"} do %>
+      <i class="fab fa-google mobile-text"></i><span class = "mobile-font">&nbsp;Google</span>
+    <% end %>
+  <% end %>
+  
+-->
