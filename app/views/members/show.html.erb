@@ -1,2 +1,10 @@
-<h1>Members#show</h1>
-<p>Find me in app/views/members/show.html.erb</p>
+<h1>Member Information</h1>
+
+<strong>Member Email:</strong> <%= @member.email %><br />
+<strong>Date Joined:</strong> <%= @member.date_joined %><br />
+<strong>Member Title:</strong> <%= @member.title %><br />
+<strong>Paid Member Status:</strong> <%= @member.is_active_paid_member %><br />
+
+<br />
+
+<%= link_to "Back to Members", members_path %>

@@ -65,6 +65,7 @@
         <td class="paid-status"><%= member.is_active_paid_member %></td>
         <td class="admin-status"><%= member.is_admin %></td>
         <td class="member-actions">
+          <%= link_to 'Show', member_path(member) %>
           <%= link_to 'Edit', edit_member_path(member) %>
           <%= link_to 'remove', confirm_delete_member_path(member), method: :delete %></td>
       </tr>
