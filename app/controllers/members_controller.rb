@@ -49,13 +49,20 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    @member = Member.find(params[:id])
-    if @member.destroy
-      flash[:notice] = "Member deleted successfully"
+    # @member = Member.find(params[:id])
+    # if @member.destroy
+    #   flash[:notice] = "Member deleted successfully"
+    # else
+    #   flash[:notice] = "Member could not be deleted"
+    # end
+    # redirect_to members_path
+    if current_member
+      sign_out current_member
+      flash[:notice] = "You have been signed out."
     else
-      flash[:notice] = "Member could not be deleted"
+      flash[:alert] = "You are not signed in"
     end
-    redirect_to members_path
+    redirect_to root_path
   end
 
   def member_params

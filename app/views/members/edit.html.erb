@@ -10,7 +10,9 @@
   <%= form_with(model: @member, url: update_member_path(@member), method: :patch) do |form| %>
     <p>
       <strong>Email:</strong>
-      <%= form.text_field(:email) %><br />
+      <%= @member.email %><br />
+      <strong>Name:</strong>
+      <%= @member.full_name %><br />
       <strong>Title:</strong>
       <%= form.text_field(:title) %><br />
       <strong>Paid Status:</strong>
