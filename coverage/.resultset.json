@@ -299,6 +299,15 @@
           1,
           1,
           null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
           null,
           1,
           null
@@ -320,6 +329,12 @@
           null
         ]
       },
+      "/csce431/sprint-1-bhakti-yoga-club/app/helpers/members_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
       "/csce431/sprint-1-bhakti-yoga-club/app/helpers/pages_helper.rb": {
         "lines": [
           1,
@@ -327,6 +342,25 @@
           null,
           1,
           null,
+          null
+        ]
+      },
+      "/csce431/sprint-1-bhakti-yoga-club/spec/helpers/members_helper_spec.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
           null
         ]
       },
@@ -364,6 +398,112 @@
           null
         ]
       },
+      "/csce431/sprint-1-bhakti-yoga-club/spec/requests/members_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/csce431/sprint-1-bhakti-yoga-club/app/models/member.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
+      "/csce431/sprint-1-bhakti-yoga-club/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
       "/csce431/sprint-1-bhakti-yoga-club/spec/requests/pages_spec.rb": {
         "lines": [
           1,
@@ -373,6 +513,69 @@
           1,
           1,
           null,
+          null
+        ]
+      },
+      "/csce431/sprint-1-bhakti-yoga-club/spec/views/members/create.html.erb_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/csce431/sprint-1-bhakti-yoga-club/spec/views/members/destroy.html.erb_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/csce431/sprint-1-bhakti-yoga-club/spec/views/members/edit.html.erb_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/csce431/sprint-1-bhakti-yoga-club/spec/views/members/index.html.erb_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/csce431/sprint-1-bhakti-yoga-club/spec/views/members/new.html.erb_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/csce431/sprint-1-bhakti-yoga-club/spec/views/members/show.html.erb_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/csce431/sprint-1-bhakti-yoga-club/spec/views/members/update.html.erb_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
           null
         ]
       },
@@ -442,10 +645,81 @@
           null
         ]
       },
-      "/csce431/sprint-1-bhakti-yoga-club/app/models/application_record.rb": {
+      "/csce431/sprint-1-bhakti-yoga-club/app/controllers/members_controller.rb": {
         "lines": [
           1,
           1,
+          4,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          0,
+          null,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null
         ]
       },
@@ -456,6 +730,6 @@
         ]
       }
     },
-    "timestamp": 1707419205
+    "timestamp": 1707701747
   }
 }
