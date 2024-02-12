@@ -11,6 +11,7 @@
 <% if member_signed_in? %>
   <% if current_member.is_admin? %>
     <%= link_to 'View Members', members_path %> <!-- Corrected syntax -->
+    <%= link_to 'Attendance Items', attendances_path %>
   <% end %>
 <% end %>
 
