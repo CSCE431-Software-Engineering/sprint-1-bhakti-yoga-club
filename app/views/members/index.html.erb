@@ -37,17 +37,12 @@
 
 </style>
 
-<% if flash[:notice] %>
-  <div class="alert alert-success" style="color: green;">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-
 <h1>Members List</h1>
 
 <table>
   <thead>
     <tr>
+      <th class="name">Name</th>
       <th class="email">Email</th>
       <th class="join-date">Join Date</th>
       <th class="left-date">Date Left</th>
@@ -59,6 +54,7 @@
   <tbody>
     <% @members.each do |member| %>
       <tr>
+        <td class="name"><%= member.full_name %></td>
         <td class="email"><%= member.email %></td>
         <td class="join-date"><%= member.date_joined %></td>
         <td class="left-date"><%= member.date_left %></td>
@@ -66,8 +62,7 @@
         <td class="admin-status"><%= member.is_admin %></td>
         <td class="member-actions">
           <%= link_to 'Show', member_path(member) %>
-          <%= link_to 'Edit', edit_member_path(member) %>
-          <%= link_to 'remove', confirm_delete_member_path(member), method: :delete %></td>
+          <%= link_to 'Edit', edit_member_path(member) %></td>
       </tr>
     <% end %>
   </tbody>

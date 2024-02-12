@@ -1,12 +1,6 @@
 <div class="books edit">
   <h2>Edit Member Information</h2>
 
-  <% if flash[:notice] %>
-    <div class="alert alert-success" style="color: red;">
-      <%= flash[:notice] %>
-    </div>
-  <% end %>
-
   <%= form_with(model: @member, url: update_member_path(@member), method: :patch) do |form| %>
     <p>
       <strong>Email:</strong>

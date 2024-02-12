@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   root "pages#home"
 
-  get 'announcements', to: 'announcements#index'
+  get 'announcements', to: 'announcements#index', as: 'announcements'
   get 'announcements/new', to: 'announcements#new', as: 'new_announcement'
   get 'announcements/:id', to: 'announcements#show', as: 'announcement'
   post 'announcements', to: 'announcements#create'
