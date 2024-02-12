@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   patch 'announcements/:id', to: 'announcements#update', as: 'update_announcement'
   delete 'announcements/:id', to: 'announcements#destroy', as: 'delete_announcement'
 
+  resources :events
+
   get 'members', to: 'members#index', as: 'members'
   get 'members/new', to: 'members#new', as: 'new_member'
   post 'members', to: 'members#create', as: 'create_member'
