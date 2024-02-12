@@ -1,7 +1,7 @@
 # app/controllers/announcements_controller.rb
 class AnnouncementsController < ApplicationController
 
-    before_action :authenticate_member!, except: [:index, :show]
+  before_action :authenticate_member!, except: [:index, :show]
   before_action :set_announcement, only: [:show, :edit, :update, :destroy]
 
   def index
