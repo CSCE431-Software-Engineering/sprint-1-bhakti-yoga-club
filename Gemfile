@@ -45,6 +45,8 @@ gem 'yaml_db'
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
+gem 'rexml'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -87,3 +89,8 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 
 gem 'omniauth-rails_csrf_protection'
+
+gem 'rails-controller-testing'
+
+
+gem 'validates_email_format_of'

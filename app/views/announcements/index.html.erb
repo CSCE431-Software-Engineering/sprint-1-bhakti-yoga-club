@@ -3,7 +3,10 @@
 
 <h1>Announcement Log</h1>
 
-<%= link_to 'Make Announcement', new_announcement_path %>
+
+<% if member_signed_in? && current_member.is_admin? %>
+  <%= link_to 'Make Announcement', new_announcement_path %>
+<% end %>
 
 <ul>
   <% @announcements.each do |announcement| %>
