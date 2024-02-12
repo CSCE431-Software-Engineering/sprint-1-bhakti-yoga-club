@@ -4,11 +4,9 @@
 <h1>Announcement Log</h1>
 
 
-<% if member_signed_in? %>
+<% if member_signed_in? && current_member.is_admin? %>
   <%= link_to 'Make Announcement', new_announcement_path %>
 <% end %>
-
-<!-- <%= link_to 'Make Announcement', new_announcement_path %> -->
 
 <ul>
   <% @announcements.each do |announcement| %>
