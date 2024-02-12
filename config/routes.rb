@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   post 'members', to: 'members#create'
   get 'members/:id/edit', to: 'members#edit', as: 'edit_member'
   patch 'members/:id', to: 'members#update'
-  get 'members/:id/delete', to: 'members#delete', as: 'delete_member'
-  delete 'members/:id', to: 'members#destroy'
+  get 'members/:id/delete', to: 'members#delete', as: 'confirm_delete_member'
+  delete 'members/:id', to: 'members#destroy', as: 'delete_member'
 
   
   root "pages#home"

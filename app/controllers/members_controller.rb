@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
   def index
-    @members = Member.order(email: :desc)
+    @members = Member.order(email: :asc)
   end
 
   def show
@@ -44,9 +44,17 @@ class MembersController < ApplicationController
   end
 
   def delete
+    @member = Member.find(params[:id])
   end
 
   def destroy
+    @member = Member.find(params[:id])
+    if @member.destroy
+      flash[:notice] = "Member deleted successfully"
+    else
+      flash[:notice] = "Member could not be deleted"
+    end
+    redirect_to members_path
   end
 
   def member_params

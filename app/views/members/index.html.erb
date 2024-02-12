@@ -36,6 +36,11 @@
 
 </style>
 
+<% if flash[:notice] %>
+  <div class="alert alert-success" style="color: green;">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 
 <h1>Members List</h1>
 
@@ -54,7 +59,7 @@
         <td class="join-date"><%= member.date_joined %></td>
         <td class="member-actions">
           <%= link_to 'Edit', edit_member_path(member) %>
-          <%= link_to 'remove', delete_member_path(member) %></td>
+          <%= link_to 'remove', confirm_delete_member_path(member), method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
