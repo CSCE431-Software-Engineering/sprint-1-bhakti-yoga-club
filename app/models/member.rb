@@ -2,7 +2,7 @@ class Member < ApplicationRecord
 
 	devise :omniauthable, omniauth_providers: [:google_oauth2]
 
-  validates :email, format: { with: /\A(?:@gmail\.com|@tamu\.edu)\z/, message: "is not from an allowed domain" }
+  # validates :email, format: { with: /\A(?:@gmail\.com|@tamu\.edu)\z/, message: "is not from an allowed domain" }
 
 	validates_email_format_of :email, message: "is not valid"
 
@@ -18,7 +18,7 @@ class Member < ApplicationRecord
   end
 
   def self.from_google(email:, full_name:, date_joined:)
-    # return nil unless email =~ /@mybusiness.com\z/
+    return nil unless email =~ /@(tamu\.edu|@gmail\.com)\z/
     create_with(full_name: full_name, date_joined: date_joined).find_or_create_by!(email: email)
   end
 end
