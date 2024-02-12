@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'announcements', to: 'announcements#create'
   get 'announcements/:id/edit', to: 'announcements#edit', as: 'edit_announcement'
   patch 'announcements/:id', to: 'announcements#update', as: 'update_announcement'
+  delete 'announcements/:id', to: 'announcements#destroy', as: 'delete_announcement'
 
   get 'members', to: 'members#index', as: 'members'
   get 'members/new', to: 'members#new', as: 'new_member'
