@@ -1,0 +1,71 @@
+<style>
+  table {
+    width: auto;
+    max-width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    border: 1px solid grey;
+  }
+
+  th {
+    text-align: center;
+    width: auto;
+    border: 1px solid grey;
+    padding: 0 20px;
+  }
+
+  td {
+    text-align: center;
+    border: 1px solid lightgrey;
+    padding: 0 20px;
+  }
+
+  td.email {
+    text-align: left;
+    width: auto;
+  }
+
+  td.join-date {
+    text-align: center;
+    width: auto;
+  }
+  
+  td.member-actions {
+    text-align: center;
+    width: auto;
+  }
+
+</style>
+
+<h1>Members List</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th class="name">Name</th>
+      <th class="email">Email</th>
+      <th class="join-date">Join Date</th>
+      <th class="left-date">Date Left</th>
+      <th class="paid-status">Paid Member Status</th>
+      <th class="admin-status">Admin Status</th>
+      <th class="member-actions">Member Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td class="name"><%= member.full_name %></td>
+        <td class="email"><%= member.email %></td>
+        <td class="join-date"><%= member.date_joined %></td>
+        <td class="left-date"><%= member.date_left %></td>
+        <td class="paid-status"><%= member.is_active_paid_member %></td>
+        <td class="admin-status"><%= member.is_admin %></td>
+        <td class="member-actions">
+          <%= link_to 'Show', member_path(member) %>
+          <%= link_to 'Edit', edit_member_path(member) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table><br />
+
+<%= link_to 'Back to Home', root_path %>
