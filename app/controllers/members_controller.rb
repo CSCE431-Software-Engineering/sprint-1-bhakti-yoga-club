@@ -39,7 +39,8 @@ class MembersController < ApplicationController
       flash[:notice] = "Member successfully updated"
       redirect_to members_path
     else
-      render :edit
+      flash[:notice] = "Member update failed"
+      redirect_to edit_member_path(@member)
     end
   end
 
@@ -59,6 +60,15 @@ class MembersController < ApplicationController
 
   def member_params
     params.require(:member).permit(:email)
+  end
+
+  def member_update_params
+    params.require(:member).permit(
+      :email,
+      :title,
+      :is_active_paid_member,
+      :is_admin
+      )
   end
 
 end

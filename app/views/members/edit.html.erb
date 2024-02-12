@@ -1,2 +1,30 @@
-<h1>Members#edit</h1>
-<p>Find me in app/views/members/edit.html.erb</p>
+<div class="books edit">
+  <h2>Edit Member Information</h2>
+
+  <% if flash[:notice] %>
+    <div class="alert alert-success" style="color: red;">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <%= form_with(model: @member, url: update_member_path(@member), method: :patch) do |form| %>
+    <p>
+      <strong>Email:</strong>
+      <%= form.text_field(:email) %><br />
+      <strong>Title:</strong>
+      <%= form.text_field(:title) %><br />
+      <strong>Paid Status:</strong>
+      <%= form.check_box(:is_active_paid_member) %><br />
+      <strong>Admin Status:</strong>
+      <%= form.check_box(:is_admin) %><br />
+    </p>
+
+    <div class="form-buttons">
+      <%= form.submit("Update Member") %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= link_to("Back to members", members_path, class: 'back-link') %>
+  </div>
+</div>
