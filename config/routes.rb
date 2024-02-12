@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'announcements/:id/edit', to: 'announcements#edit', as: 'edit_announcement'
   patch 'announcements/:id', to: 'announcements#update', as: 'update_announcement'
 
+  resources :events
+
   get 'members', to: 'members#index', as: 'members'
   get 'members/new', to: 'members#new', as: 'new_member'
   post 'members', to: 'members#create', as: 'create_member'

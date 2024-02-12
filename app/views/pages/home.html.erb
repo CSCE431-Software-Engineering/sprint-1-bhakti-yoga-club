@@ -6,6 +6,8 @@
 
 <%= link_to 'Announcements', announcements_path %> <br />
 
+<%= link_to 'Events', events_path %>  <br />
+
 <% if member_signed_in? %>
   <% if current_member.is_admin? %>
     <%= link_to 'View Members', members_path %> <!-- Corrected syntax -->
