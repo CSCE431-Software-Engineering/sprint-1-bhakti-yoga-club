@@ -101,11 +101,6 @@ GEM
     diff-lcs (1.5.1)
     docile (1.4.0)
     erubi (1.12.0)
-    factory_bot (6.4.6)
-      activesupport (>= 5.0.0)
-    factory_bot_rails (6.4.3)
-      factory_bot (~> 6.4)
-      railties (>= 5.0.0)
     faraday (2.9.0)
       faraday-net_http (>= 2.0, < 3.2)
     faraday-net_http (3.1.0)
@@ -357,7 +352,6 @@ DEPENDENCIES
   capybara
   debug
   devise
-  factory_bot_rails
   importmap-rails
   jbuilder
   omniauth
@@ -366,8 +360,8 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.8)
-  rexml
   rails-controller-testing
+  rexml
   rspec-rails
   rubocop
   rubocop-performance

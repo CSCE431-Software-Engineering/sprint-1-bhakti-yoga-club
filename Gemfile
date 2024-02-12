@@ -93,7 +93,4 @@ gem 'omniauth-rails_csrf_protection'
 gem 'rails-controller-testing'
 
 
-gem 'rails-controller-testing'
-
-
 gem 'validates_email_format_of'
