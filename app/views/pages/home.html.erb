@@ -10,8 +10,13 @@
 <p>This is the home page of our club website.</p>
 
 <%= link_to 'Announcements', announcements_path %> <br />
-<%= link_to 'Sign-Up', new_member_path %> <br />
-<%= link_to 'Members (temporary)', members_path %>
+<!-- DEPRECATED  <%= link_to 'Sign-Up', new_member_path %> <br /> -->
+
+<% if member_signed_in? %>
+  <% if current_member.is_admin? %>
+    <%= link_to 'View Members', members_path %> <!-- Corrected syntax -->
+  <% end %>
+<% end %>
 
 <% if member_signed_in? %>
   <%= button_to "Sign Out", destroy_member_session_path, method: :delete, class: "btn btn-danger" %>
