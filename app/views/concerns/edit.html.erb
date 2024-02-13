@@ -1,0 +1,11 @@
+<h1>Edit Concern</h1>
+
+<%= form_with(model: @concern, url: member_concern_path(current_member, @concern), method: :patch) do |form| %>
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+
+  <%= form.submit "Update Concern" %>
+<% end %>

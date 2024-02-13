@@ -7,6 +7,8 @@
 <%= link_to 'Announcements', announcements_path %> <br />
 
 <%= link_to 'Events', events_path %>  <br />
+<%= link_to 'Submit a Concern', new_member_concern_path(current_member) %>
+
 
 <% if member_signed_in? %>
   <% if current_member.is_admin? %>
