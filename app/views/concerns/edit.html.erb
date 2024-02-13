@@ -8,4 +8,6 @@
   <%= form.text_area :description %>
 
   <%= form.submit "Update Concern" %>
+
+  <%= link_to "Back", member_concerns_path(current_member), class: "btn btn-secondary" %>
 <% end %>
