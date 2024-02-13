@@ -21,8 +21,8 @@ RSpec.describe AttendancesController, type: :controller do
 
 
         event = Event.create(
-          name: 'Test event'
-          created_at: Time.current
+          name: 'Test event',
+          created_at: Time.current,
           updated_at: Time.current
         )
 
@@ -100,8 +100,8 @@ RSpec.describe AttendancesController, type: :controller do
     )
 
     event = Event.create(
-      name: 'Test event'
-      created_at: Time.current
+      name: 'Test event',
+      created_at: Time.current,
       updated_at: Time.current
     )
 
@@ -136,8 +136,8 @@ RSpec.describe AttendancesController, type: :controller do
     )
 
     event = Event.create(
-      name: 'Test event'
-      created_at: Time.current
+      name: 'Test event',
+      created_at: Time.current,
       updated_at: Time.current
     )
 
@@ -208,8 +208,8 @@ RSpec.describe AttendancesController, type: :controller do
         )
 
         eventa = Event.create(
-          name: 'Test event 2'
-          created_at: Time.current
+          name: 'Test event 2',
+          created_at: Time.current,
           updated_at: Time.current
         )
 
@@ -242,8 +242,8 @@ RSpec.describe AttendancesController, type: :controller do
       )
 
       event = Event.create(
-        name: 'Test event'
-        created_at: Time.current
+        name: 'Test event',
+        created_at: Time.current,
         updated_at: Time.current
       )
 
