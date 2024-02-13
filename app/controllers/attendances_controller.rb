@@ -16,8 +16,8 @@ class AttendancesController < ApplicationController
   def create
     @attendance = Attendance.new(attendance_params)
 
-    @attendance.member_id = 1
-    @attendance.event_id = 1
+    @attendance.member_id = nil
+    @attendance.event_id = nil
     @attendance.time_arrived = Time.current.in_time_zone('Central Time (US & Canada)')
     @attendance.time_departed = Time.current.in_time_zone('Central Time (US & Canada)')
 
