@@ -3,6 +3,17 @@
 <h1>Submit a Concern</h1>
 
 <%= form_with model: @concern, url: member_concerns_path(current_member) do |form| %>
+  <% if @concern.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@concern.errors.count, "error") %> prohibited this concern from being saved:</h2>
+      <ul>
+        <% @concern.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= form.label :title %>
   <%= form.text_field :title %>
 
@@ -10,4 +21,6 @@
   <%= form.text_area :description %>
 
   <%= form.submit "Submit Concern" %>
+
+  <%= link_to "Back", member_concerns_path(current_member), class: "btn btn-secondary" %>
 <% end %>
