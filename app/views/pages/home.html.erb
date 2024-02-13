@@ -4,11 +4,12 @@
 
 <p>This is the home page of our club website.</p>
 
-<%= link_to 'Announcements', announcements_path %> <br />
 
-<%= link_to 'Events', events_path %>  <br />
-<%= link_to 'Submit a Concern', new_member_concern_path(current_member) %>
-
+<% if member_signed_in? %>
+  <%= link_to 'Announcements', announcements_path %> <br />
+  <%= link_to 'Events', events_path %>  <br />
+  <%= link_to 'Concerns', member_concerns_path(current_member) %>  <br />
+<% end %>
 
 <% if member_signed_in? %>
   <% if current_member.is_admin? %>

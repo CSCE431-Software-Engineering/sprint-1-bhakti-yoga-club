@@ -1,6 +1,8 @@
 <!-- app/views/concerns/index.html.erb -->
 <h1>Your Concerns</h1>
 
+<%= link_to 'Add Concern', new_member_concern_path(current_member), class: 'btn btn-success' %>
+
 <% if @concerns.any? %>
   <% @concerns.each do |concern| %>
     <div>
