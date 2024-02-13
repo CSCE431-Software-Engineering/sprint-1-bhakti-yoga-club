@@ -8,6 +8,7 @@
 <% if member_signed_in? %>
   <%= link_to 'Announcements', announcements_path %> <br />
   <%= link_to 'Events', events_path %>  <br />
+  <%= link_to 'Concerns', member_concerns_path(current_member) %>  <br />
 <% end %>
 
 <% if member_signed_in? %>

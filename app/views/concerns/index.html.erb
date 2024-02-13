@@ -1,0 +1,22 @@
+<!-- app/views/concerns/index.html.erb -->
+<h1>Your Concerns</h1>
+
+<%= link_to 'Add Concern', new_member_concern_path(current_member), class: 'btn btn-success' %>
+
+<% if @concerns.any? %>
+  <% @concerns.each do |concern| %>
+    <div>
+      <h2><%= concern.title %></h2>
+      <p><%= concern.description %></p>
+      <!-- Add delete and edit buttons -->
+      <%= link_to 'Edit', edit_member_concern_path(current_member, concern), class: 'btn btn-primary' %>
+
+      <%= button_to 'Delete', member_concern_path(@member, concern), remote: true, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger delete-concern', data: { id: concern.id } %>
+
+    </div>
+    </div>
+  <% end %>
+<% else %>
+  <p>No concerns found.</p>
+<% end %>
+

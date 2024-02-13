@@ -8,6 +8,7 @@ class Member < ApplicationRecord
 
 	has_many :attendances
 	has_many :events, through: :attendances
+  has_many :concerns
 
 	private
 

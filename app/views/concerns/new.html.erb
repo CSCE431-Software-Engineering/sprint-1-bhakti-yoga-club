@@ -1,0 +1,13 @@
+<!-- app/views/concerns/new.html.erb -->
+
+<h1>Submit a Concern</h1>
+
+<%= form_with model: @concern, url: member_concerns_path(current_member) do |form| %>
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+
+  <%= form.submit "Submit Concern" %>
+<% end %>
