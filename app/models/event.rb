@@ -1,6 +1,10 @@
 class Event < ApplicationRecord
-	has_many :attendences
-	has_many :members, through: :attendences
+	has_many :attendances
+	has_many :members, through: :attendances
 	has_many :budget_items
 	has_many :announcements
-end
+  
+	validates :name, presence: true
+	validates :date, presence: true
+	validates :location, presence: true
+  end
