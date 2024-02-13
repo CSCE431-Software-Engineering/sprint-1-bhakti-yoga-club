@@ -3,10 +3,11 @@
 
 <h1>Attendance Log</h1>
 
+# add check to see if member is signed in
 <%= link_to 'Make Attendance Item', new_attendance_path %>
 
 <ul>
-  <% @attendances.each do |attendance| %>
+  <% @attendance.each do |attendance| %>
     <li>
       <%= link_to attendance.time_arrived.strftime('%Y-%m-%d %H:%M:%S'), attendance_path(attendance) %>
       <br><br>
