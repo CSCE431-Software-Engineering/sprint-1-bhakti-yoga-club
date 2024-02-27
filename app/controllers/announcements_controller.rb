@@ -20,19 +20,34 @@ class AnnouncementsController < ApplicationController
 
 
   def create
-      @announcement = Announcement.new(announcement_params)
+    @announcement = Announcement.new(announcement_params)
 
-      @announcement.member_id = current_member.id
-      @announcement.message_date = Time.current.in_time_zone('Central Time (US & Canada)')
+    @announcement.member_id = current_member.id
+    @announcement.message_date = Time.current.in_time_zone('Central Time (US & Canada)')
 
-      respond_to do |format|
-          if @announcement.save
-            format.html { redirect_to announcements_path, notice: 'Announcement created successfully!'}
-          else
-            Rails.logger.debug @announcement.errors.full_messages.join(', ')
-            format.html { render :new, status: :unprocessable_entity, flash: { error: @announcement.errors.full_messages.join(', ') } }
-          end
+    respond_to do |format|
+      if @announcement.save
+
+        # specific_member = Member.find_by(id: 2)
+
+        # if specific_member
+        #   Rails.logger.debug "Sending announcement email to specific member #{specific_member.id} (#{specific_member.email})..."
+        #   AnnouncementMailer.send_announcement_email(specific_member, @announcement).deliver
+
+        # else
+        #   Rails.logger.warn "Specific member not found. No email sent."
+        # end
+
+        Member.all.each do |member|
+          AnnouncementMailer.send_announcement_email(member, @announcement).deliver_now
+        end
+
+        format.html { redirect_to announcements_path, notice: 'Announcement created successfully!'}
+      else
+        Rails.logger.debug @announcement.errors.full_messages.join(', ')
+        format.html { render :new, status: :unprocessable_entity, flash: { error: @announcement.errors.full_messages.join(', ') } }
       end
+    end
   end
 
   
