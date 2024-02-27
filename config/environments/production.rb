@@ -6,7 +6,7 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.default_url_options = { host: 'byc-dev-announcements-t-z0solp.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'byc-customer-6cdc2171ca01.herokuapp.com' }
 
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
@@ -18,7 +18,7 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
   config.action_mailer.raise_delivery_errors = true
-  
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
