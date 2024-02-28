@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "events/show", type: :view do
   before(:each) do
-    assign(:event, Event.create!(
+    @event = assign(:event, Event.create!(
       name: "Name",
-      location: "Location"
+      location: "Location",
+      start_time: DateTime.now,
+      end_time: DateTime.now + 1.hour
     ))
   end
 
