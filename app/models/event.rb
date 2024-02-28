@@ -6,15 +6,15 @@ class Event < ApplicationRecord
   
 	validates :name, presence: true
 	validates :location, presence: true
-	validates :start_date, presence: true
-  	validates :end_date, presence: true
-	validate :end_date_after_start_date
+	validates :start_time, presence: true
+  	validates :end_time, presence: true
+	validate :end_time_after_start_time
   
 	  private
 	  
-	  def end_date_after_start_date
-		if start_date && end_date && end_date <= start_date
-		  errors.add(:end_date, "must be after the start date")
+	  def end_time_after_start_time
+		if start_time && end_time && end_time <= start_time
+		  errors.add(:end_time, "must be after the start date")
 		end
 	  end
   end
