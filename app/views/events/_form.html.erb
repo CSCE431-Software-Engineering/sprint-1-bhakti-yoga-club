@@ -35,24 +35,3 @@
     <%= form.submit %>
   </div>
 <% end %>
-
-
-<script>
-  $(document).ready(function() {
-    $('#start_date').change(function() {
-      var startDate = new Date($(this).val());
-      var endDateInput = $('#end_date');
-
-      endDateInput.attr('min', $(this).val());
-      
-      var endDate = new Date(endDateInput.val());
-      if (endDate < startDate) {
-        endDateInput.val($(this).val());
-      }
-
-      // Disable dates before the selected start date
-      var minDate = startDate.toISOString().split('T')[0];
-      endDateInput.attr('min', minDate);
-    });
-  });
-</script>
