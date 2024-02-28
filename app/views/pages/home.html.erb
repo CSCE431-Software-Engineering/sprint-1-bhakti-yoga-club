@@ -3,13 +3,3 @@
 <h1>Welcome to My Club</h1>
 
 <p>This is the home page of our club website.</p>
-
-<%= link_to 'Announcements', announcements_path %> <br />
-
-<%= link_to 'Events', events_path %>  <br />
-
-<% if member_signed_in? %>
-  <% if current_member.is_admin? %>
-    <%= link_to 'View Members', members_path %>
-  <% end %>
-<% end %>
