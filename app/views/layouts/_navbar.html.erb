@@ -1,0 +1,20 @@
+<!-- app/views/layouts/_navbar.html.erb -->
+
+<nav class="navbar">
+  <div class="container">
+    <ul>
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "Members", members_path %></li>
+      <!-- Add more links as needed -->
+
+      <% if member_signed_in? %>
+        <li><%= link_to "My Profile", member_path(current_member) %></li>
+        <li><%= button_to "Sign Out", destroy_member_session_path, method: :delete, class: "btn btn-danger" %></li>
+      <% else %>
+        <li><%= button_to member_google_oauth2_omniauth_authorize_path, class: "btn btn-danger", method: :post, data: {turbo: "false"} do %>
+          <i class="fab fa-google mobile-text"></i><span class = "mobile-font">&nbsp;Google</span>
+        <% end %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
