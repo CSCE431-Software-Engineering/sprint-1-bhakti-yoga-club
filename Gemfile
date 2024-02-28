@@ -96,3 +96,5 @@ gem 'rails-controller-testing'
 gem 'validates_email_format_of'
 
 gem 'jquery-rails'
+
+gem "simple_calendar", "~> 3.0"
