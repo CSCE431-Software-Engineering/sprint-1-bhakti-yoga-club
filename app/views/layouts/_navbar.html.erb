@@ -2,18 +2,26 @@
 
 <nav class="navbar">
   <div class="container">
-    <ul>
+    <!-- General Navigation Links -->
+    <ul class="navbar_nav">
       <li><%= link_to "Home", root_path %></li>
-      <li><%= link_to "Members", members_path %></li>
-      <!-- Add more links as needed -->
+      <% if member_signed_in? %><li><%= link_to "Members", members_path %></li><% end %>
+      <li><%= link_to "Events", events_path %></li>
+      <li><%= link_to "Announcements", announcements_path %></li>
+    </ul>
 
+    <!-- User Actions Links -->
+    <ul class="navbar_nav">
       <% if member_signed_in? %>
         <li><%= link_to "My Profile", member_path(current_member) %></li>
-        <li><%= button_to "Sign Out", destroy_member_session_path, method: :delete, class: "btn btn-danger" %></li>
+        <li class="navbar_signin"><%= button_to "Sign Out", destroy_member_session_path, method: :delete, class: "btn btn-danger" %></li>
       <% else %>
-        <li><%= button_to member_google_oauth2_omniauth_authorize_path, class: "btn btn-danger", method: :post, data: {turbo: "false"} do %>
-          <i class="fab fa-google mobile-text"></i><span class = "mobile-font">&nbsp;Google</span>
-        <% end %></li>
+        <li class="navbar_signin">
+          <%= button_to member_google_oauth2_omniauth_authorize_path, class: "btn btn-danger", method: :post, data: {turbo: "false"} do %>
+            <i class="fab fa-google mobile-text"></i>
+            <span class = "mobile-font">&nbsp;Sign-In</span>
+          <% end %>
+        </li>
       <% end %>
     </ul>
   </div>

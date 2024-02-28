@@ -8,21 +8,33 @@ body, ul {
   .navbar {
     background-color: #333;
     padding: 10px 0;
+    align-items: center;
+  }
+
+  .navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
   /* Navbar List */
   .navbar ul {
     list-style-type: none;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    margin: 0;
   }
   
   .navbar ul li {
     display: inline-block;
-    margin: 0 10px;
+    color: #fff;
+    margin-left: 10px;
+    font-size: 20px;
   }
   
   /* Navbar Links */
   .navbar ul li a {
+    display: flex;
     color: #fff;
     text-decoration: none;
     padding: 5px 10px;
@@ -31,4 +43,31 @@ body, ul {
   .navbar ul li a:hover {
     background-color: #555;
     border-radius: 5px;
+  }
+
+  /* Sign-In button styling */
+  .navbar_signin {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  .navbar_signin button {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none;
+    border-radius: 5px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 1px solid transparent;
+    outline: none;
+    box-shadow: none;
+    font-size: 20px;
+    font-family: inherit;
+    padding: 5px 10px;
+  }
+
+  .navbar_signin .btn:hover {
+    background-color: #555;
   }
