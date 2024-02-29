@@ -22,6 +22,16 @@ Rails.application.routes.draw do
   delete 'members/:id', to: 'members#destroy', as: 'delete_member'
   get 'members/:id', to: 'members#show', as: 'member'
 
+  resources :members do
+    resources :concerns, only: [:index, :new, :create, :edit, :update, :destroy] do
+      get 'sort_by_title', on: :collection
+      get 'sort_by_time', on: :collection
+      get 'sort_by_status', on: :collection
+    end
+  end
+  
+  
+
   devise_for :members, controllers: { omniauth_callbacks: 'members/omniauth_callbacks' }
   devise_scope :member do
     get 'members/sign_in', to: 'members/sessions#new', as: :new_member_session

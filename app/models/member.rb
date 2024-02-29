@@ -8,6 +8,7 @@ class Member < ApplicationRecord
 
 	has_many :attendances
 	has_many :events, through: :attendances
+  has_many :concerns
 
 	private
 
@@ -18,7 +19,6 @@ class Member < ApplicationRecord
   end
 
   def self.from_google(email:, full_name:, date_joined:)
-    return nil unless email =~ /@(tamu\.edu|@gmail\.com)\z/
     create_with(full_name: full_name, date_joined: date_joined).find_or_create_by!(email: email)
   end
 end
