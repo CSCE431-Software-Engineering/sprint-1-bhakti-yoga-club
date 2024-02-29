@@ -1,0 +1,33 @@
+<!-- app/views/attendances/show.html.erb -->
+<h1>Attendance Details</h1>
+
+  <h2>Member Information</h2>
+  <p><strong>Member ID:</strong> <%= @attendance.member_id %></p>
+  <p><strong>Name:</strong> <%= @attendance.member.title %></p>
+  <p><strong>Email:</strong> <%= @attendance.member.email %></p>
+  <!-- Add any other member attributes you want to display -->
+
+
+  <h3>Event Information</h3>
+  <p><strong>Event ID:</strong> <%= @attendance.event_id %></p>
+  <p><strong>Name:</strong> <%= @attendance.event.name %></p>
+  <p><strong>Location:</strong> <%= @attendance.event.location %></p>
+  <!-- Add any other event attributes you want to display -->
+
+  <h4>Time Information</h4>
+
+<% if @attendance.time_arrived.present? %>
+  <p><strong>Arrival Time:</strong> <%= @attendance.time_arrived.strftime('%Y-%m-%d %H:%M:%S') %></p>
+<% else %>
+  <p>No arrival time information available for this attendance item.</p>
+
+<% if @attendance.time_departed.present? %>
+  <p><strong>Departure Time:</strong> <%= @attendance.time_departed.strftime('%Y-%m-%d %H:%M:%S') %></p>
+<% else %>
+  <p>No departure time information available for this attendance item.</p>
+
+<%= link_to 'Edit', edit_attendance_path(@attendance) %>
+<%= button_to "Delete", @attendance, method: :delete %>
+
+<% end %>
+<%= link_to 'Back to Attendance Items', attendances_path %>

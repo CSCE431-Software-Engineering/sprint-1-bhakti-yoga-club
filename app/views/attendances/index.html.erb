@@ -1,0 +1,15 @@
+<!-- app/views/attendances/index.html.erb -->
+<%= link_to 'Back', root_path %>
+
+<h1>Attendance Log</h1>
+
+<%= link_to 'Make Attendance Item', new_attendance_path %>
+
+<ul>
+  <% @attendance.each do |attendance| %>
+    <li>
+      <%= link_to attendance.time_arrived.strftime('%Y-%m-%d %H:%M:%S'), attendance_path(attendance) %>
+      <br><br>
+    </li>
+  <% end %>
+</ul>

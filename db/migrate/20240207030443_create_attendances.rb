@@ -1,3 +1,4 @@
+#db/migrate/20240207030443_create_attendances.rb
 class CreateAttendances < ActiveRecord::Migration[7.0]
   def change
     create_table :attendances do |t|

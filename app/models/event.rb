@@ -1,3 +1,4 @@
+
 class Event < ApplicationRecord
 	has_many :attendances
 	has_many :members, through: :attendances
@@ -17,4 +18,3 @@ class Event < ApplicationRecord
 		  errors.add(:end_time, "must be after the start date")
 		end
 	  end
-  end
