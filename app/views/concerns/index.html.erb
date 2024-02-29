@@ -1,24 +1,59 @@
 <!-- app/views/concerns/index.html.erb -->
 <h1>Your Concerns</h1>
 
-<%= link_to 'Add Concern', new_member_concern_path(current_member), class: 'btn btn-success' %>
-
-<% if @concerns.any? %>
-  <% @concerns.each do |concern| %>
-    <div>
-      <h2><%= concern.title %></h2>
-      <p><%= concern.description %></p>
-      <!-- Add delete and edit buttons -->
-      <%= link_to 'Edit', edit_member_concern_path(current_member, concern), class: 'btn btn-primary' %>
-
-      <%= button_to 'Delete', member_concern_path(@member, concern), remote: true, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger delete-concern', data: { id: concern.id } %>
-
-    </div>
-    </div>
-  <% end %>
-<% else %>
-  <p>No concerns found.</p>
-
-  <%= link_to "Back to Home", root_path %>
+<% unless current_member.is_admin? %>
+  <%= link_to 'Add Concern', new_member_concern_path(current_member), class: 'btn btn-success' %>
 <% end %>
+
+<div class="sorting-buttons">
+  <strong>Sort By:</strong>
+  <%= button_tag 'A-Z', type: 'button', class: 'btn btn-primary sort-button', data: { sort_by: 'title' } %>
+  <%= button_tag 'Date Created', type: 'button', class: 'btn btn-primary sort-button', data: { sort_by: 'created_at' } %>
+  <%= button_tag 'Resolve Status', type: 'button', class: 'btn btn-primary sort-button', data: { sort_by: 'status' } %>
+</div>
+
+<div class="concerns-container">
+  <%= render 'concerns/index', concerns: @concerns %>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sortButtons = document.querySelectorAll('.sort-button');
+    sortButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const sortBy = this.dataset.sortBy;
+        let fetchURL;
+
+        if (sortBy === 'title') {
+          fetchURL = '<%= sort_by_title_member_concerns_path(current_member) %>';
+        } else if (sortBy === 'created_at') {
+          fetchURL = '<%= sort_by_time_member_concerns_path(current_member) %>';
+        }
+        else if (sortBy === 'status') {
+          fetchURL = '<%= sort_by_status_member_concerns_path(current_member) %>';
+        }
+
+        if (fetchURL) {
+          fetchData(fetchURL);
+        }
+      });
+    });
+
+    function fetchData(url) {
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.text())
+      .then(data => {
+        const concernsContainer = document.querySelector('.concerns-container');
+        concernsContainer.innerHTML = data;
+      })
+      .catch(error => console.error('Error:', error));
+    }
+  });
+</script>
+
 
