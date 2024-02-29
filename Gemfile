@@ -94,3 +94,5 @@ gem 'rails-controller-testing'
 
 
 gem 'validates_email_format_of'
+
+gem 'factory_bot_rails'

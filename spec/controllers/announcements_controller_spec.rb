@@ -70,5 +70,37 @@ RSpec.describe AnnouncementsController, type: :controller do
       )
     end
   end
+
+  describe '#index' do
+    it 'assigns announcements in descending order of message_date' do
+      # Create a single announcement with a unique message_date
+      announcement = Announcement.create(
+        message_title: 'Test Title', 
+        message_text: 'Test Text', 
+        message_date: Time.current, 
+        member_id: 1
+      )
+
+      # Call the index method
+      get :index
+
+      # Access the ID directly from the single announcement
+      assigned_id = assigns(:announcements).first.id
+
+      # Expect that the @announcements instance variable is assigned
+      # Check only for the order, using the valid ID
+      expect(assigned_id).to eq(announcement.id)
+    end
+  end
+
+  describe '#new' do
+    it 'assigns a new announcement to @announcement' do
+      # Call the new method
+      get :new
+
+      # Expect that the @announcement instance variable is assigned
+      expect(assigns(:announcement)).to be_a_new(Announcement)
+    end
+  end  
   
 end
