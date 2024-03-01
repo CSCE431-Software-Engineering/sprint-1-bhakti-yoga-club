@@ -19,19 +19,18 @@ class ApplicationController < ActionController::Base
     end
 
     def set_admin_view
-        if current_member && current_member.is_admin?
-            session[:admin_view] = true
-        else
-            session[:admin_view] = false
+        unless session.key?(:admin_view)
+            if current_member && current_member.is_admin?
+                session[:admin_view] = true
+            else
+                session[:admin_view] = false
+            end
         end
-        @admin_mode = session[:admin_view]
-        Rails.logger.info "Current value of admin_view session variable: #{@admin_mode}"
+        Rails.logger.info "Current value of admin_view session variable: #{session[:admin_view]}"
     end
 
     def toggle_admin_view
         session[:admin_view] = !session[:admin_view]
-        @admin_mode = session[:admin_view]
-        Rails.logger.info "Current value of admin_view session variable: #{@admin_mode}"
         redirect_back(fallback_location: root_path)
     end
 
