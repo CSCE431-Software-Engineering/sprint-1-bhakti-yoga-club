@@ -28,17 +28,7 @@ class AnnouncementsController < ApplicationController
     respond_to do |format|
       if @announcement.save
 
-        # specific_member = Member.find_by(id: 2)
-
-        # if specific_member
-        #   Rails.logger.debug "Sending announcement email to specific member #{specific_member.id} (#{specific_member.email})..."
-        #   AnnouncementMailer.send_announcement_email(specific_member, @announcement).deliver
-
-        # else
-        #   Rails.logger.warn "Specific member not found. No email sent."
-        # end
-
-        Member.all.each do |member|
+        Member.where(is_on_mailing_list: true).each do |member|
           AnnouncementMailer.send_announcement_email(member, @announcement).deliver_now
         end
 
@@ -65,10 +55,8 @@ class AnnouncementsController < ApplicationController
   
   def destroy
     @announcement.destroy
-  
-    respond_to do |format|
-      format.html { redirect_to announcements_path, notice: 'Announcement was successfully destroyed.' }
-    end
+
+    redirect_to announcements_path, notice: 'Announcement was successfully destroyed.'
   end
 
   private
