@@ -1,6 +1,8 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem 'byebug'
+
 ruby "3.1.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
@@ -71,7 +73,7 @@ group :development do
   # gem "rack-mini-profiler"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem "spring"
 end
 
 group :test do
@@ -84,6 +86,7 @@ end
 
 gem 'brakeman'
 
+
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
@@ -95,4 +98,6 @@ gem 'rails-controller-testing'
 
 gem 'validates_email_format_of'
 
-gem 'factory_bot_rails'
+gem 'jquery-rails'
+
+gem "simple_calendar", "~> 3.0"
