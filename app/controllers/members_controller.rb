@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
 
-  before_action :require_admin, except: [:show, :destroy]
-  before_action :authorize_member_or_admin, only: [:show]
+  before_action :require_admin, except: [:show, :destroy]   # See 'require_admin' in 'app/controllers/application_controller.rb'
+  before_action :authorize_member_or_admin, only: [:show]   # See 'authorize_member_or_admin' under private functions
 
   def index
     @members = Member.order(email: :asc)
@@ -53,13 +53,6 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    # @member = Member.find(params[:id])
-    # if @member.destroy
-    #   flash[:notice] = "Member deleted successfully"
-    # else
-    #   flash[:notice] = "Member could not be deleted"
-    # end
-    # redirect_to members_path
     if current_member
       sign_out current_member
       flash[:notice] = "You have been signed out."
@@ -84,6 +77,7 @@ class MembersController < ApplicationController
       )
   end
 
+  # Function that determines whether a user should be able to view their personal member data. (Access only to admins and that member)
   def authorize_member_or_admin
     @member = Member.find(params[:id])
     unless current_member == @member || current_member&.is_admin?

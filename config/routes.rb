@@ -27,4 +27,6 @@ Rails.application.routes.draw do
     get 'members/sign_in', to: 'members/sessions#new', as: :new_member_session
     delete 'members/sign_out', to: 'members/sessions#destroy', as: :destroy_member_session
   end
+
+  match 'toggle_view', to: 'application#toggle_admin_view', via: [:get, :post], as: 'toggle_view'
 end
