@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
 
-  before_action :require_admin, except: [:show, :destroy]   # See 'require_admin' in 'app/controllers/application_controller.rb'
+  before_action :require_admin, except: [:index, :show, :destroy]   # See 'require_admin' in 'app/controllers/application_controller.rb'
   before_action :authorize_member_or_admin, only: [:show]   # See 'authorize_member_or_admin' under private functions
 
   def index

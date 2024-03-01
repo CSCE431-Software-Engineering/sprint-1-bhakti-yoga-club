@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    # Initializes the view for the current user (NOTE: There should still be checks for admin)
     def set_admin_view
         unless session.key?(:admin_view)
             if current_member && current_member.is_admin?
@@ -26,9 +27,9 @@ class ApplicationController < ActionController::Base
                 session[:admin_view] = false
             end
         end
-        Rails.logger.info "Current value of admin_view session variable: #{session[:admin_view]}"
     end
 
+    # Toggles the view
     def toggle_admin_view
         session[:admin_view] = !session[:admin_view]
         redirect_back(fallback_location: root_path)
