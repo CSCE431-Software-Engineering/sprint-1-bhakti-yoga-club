@@ -62,6 +62,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_28_011546) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "members", force: :cascade do |t|
