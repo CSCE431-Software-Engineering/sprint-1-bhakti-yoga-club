@@ -2,18 +2,18 @@ class Member < ApplicationRecord
 
 	devise :omniauthable, omniauth_providers: [:google_oauth2]
 
-	validates_email_format_of :email, message: "is not valid"
+	# validates_email_format_of :email, message: "is not valid"
 
 	has_many :attendances
 	has_many :events, through: :attendances
 
 	private
 
-	def check_email_format
-    unless ValidatesEmailFormatOf.validates_email_format(email)
-      errors.add(:email, "is not valid")
-    end
-  end
+	# def check_email_format
+  #   unless ValidatesEmailFormatOf.validates_email_format(email)
+  #     errors.add(:email, "is not valid")
+  #   end
+  # end
 
   def self.from_google(email:, full_name:, date_joined:)
     # return nil unless email =~ /@(tamu\.edu|@gmail\.com)\z/

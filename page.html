@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bhakti Yoga Club</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    
+
+    
+    <script src="/assets/application-37f365cbecf1fa2810a8303f4b6571676fa1f9c56c248528bc14ddb857531b95.js" data-turbolinks-track="reload"></script>
+
+    <style>
+        .flash__alert   { color: red; }
+        .flash__notice  { color: blue; }
+        .flash__success { color: green; }
+    </style>
+
+    <link rel="stylesheet" href="/assets/application-d5df7641dfb2420ce440f1fcf88adf4eb32104330575b0cb0a5070fe15d98061.css" media="all" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/navbar_styles-313b832938cc06fd551dbe695c101627f78f826e25e9486a77f6f8910b2c7457.css" media="all" />
+
+  </head>
+
+  <body>
+    <!-- app/views/layouts/_navbar.html.erb -->
+
+<nav class="navbar">
+  <div class="container">
+    <!-- General Navigation Links -->
+    <ul class="navbar_nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/members">Members</a></li>
+      <li><a href="/events">Events</a></li>
+      <li><a href="/announcements">Announcements</a></li>
+    </ul>
+
+    <!-- User Actions Links -->
+    <ul class="navbar_nav">
+        <li><a href="/members/44">My Profile</a></li>
+        <li class="navbar_signin"><form class="button_to" method="post" action="/members/sign_out"><input type="hidden" name="_method" value="delete" autocomplete="off" /><button class="btn btn-danger" type="submit">Sign Out</button></form></li>
+    </ul>
+  </div>
+</nav>
+
+        <section class="flash flash__success">Successfully authenticated from Google account.</section>
+    
+    <!-- app/views/pages/home.html.erb -->
+
+<h1>Welcome to My Club</h1>
+
+<p>This is the home page of our club website.</p>
+  </body>
+</html>
