@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BhaktiYogaClub</title>
+    <title>Bhakti Yoga Club</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,9 +15,16 @@
         .flash__notice  { color: blue; }
         .flash__success { color: green; }
     </style>
+
+    <% # include styles %>
+    <%= stylesheet_link_tag "application", media: 'all', "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'navbar_styles', media: 'all'%>
+
   </head>
 
   <body>
+    <%= render 'layouts/navbar' %>
+
     <% if flash.any? %>
       <% flash.each do |key, value| -%>
         <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
@@ -26,15 +33,4 @@
     
     <%= yield %>
   </body>
-
-  <footer>
-    <% if member_signed_in? %>
-      <%= link_to "My Profile", member_path(current_member) %>
-      <%= button_to "Sign Out", destroy_member_session_path, method: :delete, class: "btn btn-danger" %>
-    <% else %>
-      <%= button_to member_google_oauth2_omniauth_authorize_path, class: "btn btn-danger", method: :post, data: {turbo: "false"} do %>
-        <i class="fab fa-google mobile-text"></i><span class = "mobile-font">&nbsp;Sign in with Google</span>
-      <% end %>
-    <% end %>
-  </footer>
 </html>

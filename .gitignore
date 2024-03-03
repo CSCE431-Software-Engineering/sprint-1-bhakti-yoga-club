@@ -32,3 +32,5 @@
 
 # Ignore visual studio project folder
 .vs/
+
+/coverage/*
