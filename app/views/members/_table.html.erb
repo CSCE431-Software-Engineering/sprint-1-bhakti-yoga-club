@@ -1,36 +1,61 @@
 <% if current_member.is_admin? && session[:admin_view] %>
 
-  <!-- ADMIN TABLE -->
+  <% if session[:admin_view] %>
 
-  <table>
-    <thead>
-      <tr>
-        <th class="name">Name</th>
-        <th class="email">Email</th>
-        <th class="join-date">Join Date</th>
-        <th class="left-date">Date Left</th>
-        <th class="paid-status">Paid Member Status</th>
-        <th class="admin-status">Admin Status</th>
-        <th class="member-actions">Member Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @members.each do |member| %>
+    <!-- ADMIN TABLE -->
+
+    <table>
+      <thead>
         <tr>
-          <td class="name"><%= member.full_name %></td>
-          <td class="email"><%= member.email %></td>
-          <td class="join-date"><%= member.date_joined %></td>
-          <td class="left-date"><%= member.date_left %></td>
-          <td class="paid-status"><%= member.is_active_paid_member %></td>
-          <td class="admin-status"><%= member.is_admin %></td>
-          <td class="member-actions">
-            <%= link_to 'Show', member_path(member) %>
-            <%= link_to 'Edit', edit_member_path(member) %>
-            </td>
+          <th class="name">Name</th>
+          <th class="email">Email</th>
+          <th class="join-date">Join Date</th>
+          <th class="left-date">Date Left</th>
+          <th class="paid-status">Paid Member Status</th>
+          <th class="admin-status">Admin Status</th>
+          <th class="member-actions">Member Actions</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @members.each do |member| %>
+          <tr>
+            <td class="name"><%= member.full_name %></td>
+            <td class="email"><%= member.email %></td>
+            <td class="join-date"><%= member.date_joined %></td>
+            <td class="left-date"><%= member.date_left %></td>
+            <td class="paid-status"><%= member.is_active_paid_member %></td>
+            <td class="admin-status"><%= member.is_admin %></td>
+            <td class="member-actions">
+              <%= link_to 'Show', member_path(member) %>
+              <%= link_to 'Edit', edit_member_path(member) %>
+              </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <% else %>
+
+    <!-- ADMIN MEMBER TABLE -->
+
+    <table>
+      <thead>
+        <tr>
+          <th class="name">Name</th>
+          <th class="join-date">Join Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @members.each do |member| %>
+          <tr>
+            <td class="name"><%= member.full_name %></td>
+            <td class="join-date"><%= member.date_joined %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <% end %>
 
 <% else %>
 
