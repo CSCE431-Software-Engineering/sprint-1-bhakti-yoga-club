@@ -2,6 +2,7 @@ class MembersController < ApplicationController
 
   before_action :require_admin, except: [:index, :show, :destroy]   # See 'require_admin' in 'app/controllers/application_controller.rb'
   before_action :authorize_member_or_admin, only: [:show]   # See 'authorize_member_or_admin' under private functions
+  before_action :index_authorize, only: [:index]
 
   def index
     @members = Member.order(email: :asc)
@@ -86,4 +87,10 @@ class MembersController < ApplicationController
     end
   end
 
+  def index_authorize
+    unless member_signed_in?
+      flash[:alert] = "You are not authorized to access this page."
+      redirect_to root_path
+    end
+  end
 end

@@ -17,8 +17,6 @@
 <br />
 
 <!-- show a link back to members if an admin -->
-<% if member_signed_in? %>
-  <% if current_member.is_admin? %>
-    <%= link_to "Back to Members", members_path %>
-  <% end %>
+<% if current_member.is_admin? %>
+  <%= link_to "Back to Members", members_path %>
 <% end %>
