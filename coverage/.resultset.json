@@ -1,6 +1,9 @@
 {
   "RSpec": {
     "coverage": {
+<<<<<<< HEAD
+      "/csce431/sprint-1-bhakti-yoga-club/app/models/member.rb": {
+=======
       "/Project/Project/sprint-1-bhakti-yoga-club/spec/controllers/announcements_controller_spec.rb": {
         "lines": [
           null,
@@ -1080,12 +1083,11 @@
         ]
       },
       "/Project/Project/sprint-1-bhakti-yoga-club/app/models/member.rb": {
+>>>>>>> 5bcf951be403ce04413d9c07f5af5fe93a9e2ef8
         "lines": [
           1,
           null,
           1,
-          null,
-          null,
           null,
           1,
           1,
@@ -1200,8 +1202,12 @@
           null,
           null,
           1,
+<<<<<<< HEAD
+          2,
+=======
           0,
           0,
+>>>>>>> 5bcf951be403ce04413d9c07f5af5fe93a9e2ef8
           null,
           null,
           1,
@@ -1211,6 +1217,24 @@
           null,
           null,
           1,
+<<<<<<< HEAD
+          6,
+          null,
+          6,
+          6,
+          null,
+          6,
+          6,
+          null,
+          5,
+          5,
+          null,
+          null,
+          10,
+          null,
+          1,
+          2,
+=======
           0,
           0,
           null,
@@ -1230,14 +1254,30 @@
           0,
           0,
           0,
+>>>>>>> 5bcf951be403ce04413d9c07f5af5fe93a9e2ef8
           null,
           null,
           null,
           null,
           null,
           1,
-          0,
+          3,
           null,
+<<<<<<< HEAD
+          3,
+          3,
+          4,
+          null,
+          2,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+=======
           0,
           0,
           0,
@@ -1271,10 +1311,17 @@
           1,
           3,
           0,
+>>>>>>> 5bcf951be403ce04413d9c07f5af5fe93a9e2ef8
           null,
           null,
           1,
           1,
+          7,
+          5,
+          null,
+          null,
+          1,
+          10,
           null,
           null,
           null,
@@ -1298,6 +1345,11 @@
           null,
           null,
           1,
+<<<<<<< HEAD
+          12,
+          0,
+          0,
+=======
           2,
           2,
           2,
@@ -1305,12 +1357,23 @@
           2,
           2,
           2,
+>>>>>>> 5bcf951be403ce04413d9c07f5af5fe93a9e2ef8
           null,
           null,
           null,
           null
         ]
       },
+<<<<<<< HEAD
+      "/csce431/sprint-1-bhakti-yoga-club/app/models/announcement.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+=======
       "/Project/Project/sprint-1-bhakti-yoga-club/spec/controllers/attendances_controller_spec.rb": {
         "lines": [
           null,
@@ -1958,6 +2021,7 @@
           null,
           null,
           null,
+>>>>>>> 5bcf951be403ce04413d9c07f5af5fe93a9e2ef8
           null,
           null
         ]
@@ -2065,6 +2129,9 @@
           null
         ]
       },
+<<<<<<< HEAD
+      "/csce431/sprint-1-bhakti-yoga-club/app/controllers/events_controller.rb": {
+=======
       "/Project/Project/sprint-1-bhakti-yoga-club/spec/controllers/event_spec.rb": {
         "lines": [
           1,
@@ -2136,6 +2203,7 @@
         ]
       },
       "/Project/Project/sprint-1-bhakti-yoga-club/app/controllers/events_controller.rb": {
+>>>>>>> 5bcf951be403ce04413d9c07f5af5fe93a9e2ef8
         "lines": [
           1,
           1,
@@ -2209,6 +2277,11 @@
           null
         ]
       },
+<<<<<<< HEAD
+      "/csce431/sprint-1-bhakti-yoga-club/app/mailers/announcement_mailer.rb": {
+        "lines": [
+          1,
+=======
       "/Project/Project/sprint-1-bhakti-yoga-club/spec/helpers/announcements_helper_spec.rb": {
         "lines": [
           1,
@@ -2229,27 +2302,31 @@
           null,
           1,
           1,
+>>>>>>> 5bcf951be403ce04413d9c07f5af5fe93a9e2ef8
           1,
           1,
+          6,
+          6,
+          6,
           null,
           null
         ]
       },
+<<<<<<< HEAD
+      "/csce431/sprint-1-bhakti-yoga-club/app/mailers/application_mailer.rb": {
+=======
       "/Project/Project/sprint-1-bhakti-yoga-club/spec/helpers/attendances_helper_spec.rb": {
+>>>>>>> 5bcf951be403ce04413d9c07f5af5fe93a9e2ef8
         "lines": [
           1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           1,
+<<<<<<< HEAD
+          null
+        ]
+      },
+      "/csce431/sprint-1-bhakti-yoga-club/app/models/event.rb": {
+        "lines": [
+=======
           1,
           1,
           1,
@@ -2284,11 +2361,14 @@
         "lines": [
           1,
           null,
+>>>>>>> 5bcf951be403ce04413d9c07f5af5fe93a9e2ef8
           null,
           1,
           1,
           1,
           1,
+<<<<<<< HEAD
+=======
           null,
           null,
           null,
@@ -2328,6 +2408,7 @@
       },
       "/Project/Project/sprint-1-bhakti-yoga-club/spec/models/event_spec.rb": {
         "lines": [
+>>>>>>> 5bcf951be403ce04413d9c07f5af5fe93a9e2ef8
           1,
           null,
           1,
@@ -2335,6 +2416,13 @@
           1,
           1,
           1,
+<<<<<<< HEAD
+          null,
+          1,
+          null,
+          1,
+          17,
+=======
           0,
           null,
           null,
@@ -2347,12 +2435,16 @@
           1,
           1,
           0,
+>>>>>>> 5bcf951be403ce04413d9c07f5af5fe93a9e2ef8
           0,
           null,
           null,
           null
         ]
       },
+<<<<<<< HEAD
+      "/csce431/sprint-1-bhakti-yoga-club/app/models/concern.rb": {
+=======
       "/Project/Project/sprint-1-bhakti-yoga-club/app/models/event.rb": {
         "lines": [
           1,
@@ -2675,6 +2767,7 @@
         ]
       },
       "/Project/Project/sprint-1-bhakti-yoga-club/spec/views/events/index.html.erb_spec.rb": {
+>>>>>>> 5bcf951be403ce04413d9c07f5af5fe93a9e2ef8
         "lines": [
           1,
           null,
@@ -3045,7 +3138,11 @@
         ]
       }
     },
+<<<<<<< HEAD
+    "timestamp": 1709569319
+=======
     "timestamp": 1709329976
+>>>>>>> 5bcf951be403ce04413d9c07f5af5fe93a9e2ef8
   }
 }
 
