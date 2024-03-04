@@ -1,4 +1,4 @@
-<div class="books edit">
+<div class="members edit">
   <h2>Edit Member Information</h2>
 
   <%= form_with(model: @member, url: update_member_path(@member), method: :patch) do |form| %>
@@ -13,6 +13,8 @@
       <%= form.check_box(:is_active_paid_member) %><br />
       <strong>Admin Status:</strong>
       <%= form.check_box(:is_admin) %><br />
+      <strong>Is On Mailing List:</strong>
+      <%= form.check_box(:is_on_mailing_list)%><br />
     </p>
 
     <div class="form-buttons">
@@ -21,6 +23,6 @@
   <% end %>
 
   <div>
-    <%= link_to("Back to members", members_path, class: 'back-link') %>
+    <%= link_to("Back to Members", members_path, class: 'back-link') %>
   </div>
 </div>

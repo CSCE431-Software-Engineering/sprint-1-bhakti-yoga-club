@@ -1,18 +1,24 @@
 <h1>Member Information</h1>
 
+<!-- basic information for the user -->
 <strong>Full Name:</strong> <%= @member.full_name %><br />
 <strong>Email:</strong> <%= @member.email %><br />
 <strong>Date Joined:</strong> <%= @member.date_joined %><br />
+
+<!-- information only available to admins -->
 <% if current_member&.is_admin? && session[:admin_view] %>
     <strong>Member Title:</strong> <%= @member.title %><br />
     <strong>Date Left:</strong> <%= @member.date_left %><br />
 <% end %>
-<% if current_member&.is_admin? && session[:admin_view] || current_member == @member %>
+
+<!-- information available to admins and that user -->
+<% # if current_member&.is_admin? && session[:admin_view] || current_member == @member %>
   <strong>Paid Status:</strong> <%= @member.is_active_paid_member %><br />
-<% end %>
+<% # end %>
 
 <br />
 
+<!-- show a link back to members if an admin -->
 <% if member_signed_in? %>
   <% if current_member.is_admin? %>
     <%= link_to "Back to Members", members_path %>
