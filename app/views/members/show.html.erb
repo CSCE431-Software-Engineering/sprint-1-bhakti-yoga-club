@@ -11,10 +11,8 @@
     <strong>Date Left:</strong> <%= @member.date_left %><br />
 <% end %>
 
-<!-- information available to admins and that user -->
-<% # if current_member&.is_admin? && session[:admin_view] || current_member == @member %>
-  <strong>Paid Status:</strong> <%= @member.is_active_paid_member %><br />
-<% # end %>
+<!-- more info -->
+<strong>Paid Status:</strong> <%= @member.is_active_paid_member %><br />
 
 <br />
 
