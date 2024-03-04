@@ -3,7 +3,8 @@ class AttendancesController < ApplicationController
   before_action :set_attendance, only: [:show, :edit, :update, :destroy]
 
   def index
-    @attendance = Attendance.order(time_arrived: :desc)
+    @attendance = Attendance.order(created_at: :desc)
+    @events = Event.all
   end
 
   def new
@@ -16,16 +17,22 @@ class AttendancesController < ApplicationController
   def create
     @attendance = Attendance.new(attendance_params)
 
-    @attendance.member_id = nil
-    @attendance.event_id = nil
-    @attendance.time_arrived = Time.current.in_time_zone('Central Time (US & Canada)')
-    @attendance.time_departed = Time.current.in_time_zone('Central Time (US & Canada)')
+    @attendance.member_id = current_member.id
+
+    respond_to do |format|
+      if @attendance.save
+        format.html { redirect_to attendances_path, notice: 'Attendance Item created successfully!'}
+      else
+        Rails.logger.debug @attendance.errors.full_messages.join(', ')
+        format.html { render :new, status: :unprocessable_entity, flash: { error: @attendance.errors.full_messages.join(', ') } }
+      end
+    end
 
   end
 
   def update
     @attendance = Attendance.find(params[:id])
-    if @attendance.update(attendance_update_params)
+    if @attendance.update(attendance_params)
       flash[:notice] = "Attendance successfully updated"
       redirect_to attendance_path
     else
@@ -37,7 +44,7 @@ class AttendancesController < ApplicationController
   def destroy
     @attendance.destroy
     flash[:notice] = "Attendance successfully destoyed"
-    redirect_to attendance_path
+    redirect_to attendances_path
   end
 
   private
