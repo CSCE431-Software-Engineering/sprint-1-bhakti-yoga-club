@@ -1,0 +1,34 @@
+<!-- app/views/concerns/_index.html.erb -->
+<% if @concerns.any? %>
+  <% @concerns.each do |concern| %>
+    <div>
+      <h2><%= concern.title %></h2>
+      <p><%= concern.description %></p>
+
+      <!-- Concern Status Bar for Admins -->
+      <% if current_member.is_admin? %>
+        <div>
+          <strong>Status:</strong> 
+          <%= form_with(model: [current_member, concern], url: member_concern_path(current_member, concern), method: :patch, remote: true, html: { class: 'status-form' }) do |f| %>
+            <%= f.select :status, Concern.statuses.keys.map { |status| [status.titleize, status] }, {}, class: 'status-dropdown', onchange: 'this.form.submit()' %>
+          <% end %>
+        </div>
+      <% else %>
+        <!-- Current Status Message for Members -->
+        <div>
+          <strong>Status:</strong> 
+          <p>Current Status: <%= concern.status %></p>
+        </div>
+      <% end %>
+
+      <!-- Edit and Delete buttons -->
+      <% unless current_member.is_admin? %>
+        <%= link_to 'Edit', edit_member_concern_path(current_member, concern), class: 'btn btn-primary' %>
+        <%= button_to 'Delete', member_concern_path(current_member, concern), remote: true, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger delete-concern', data: { id: concern.id } %>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <p>No concerns found.</p>
+  <%= link_to "Back to Home", root_path %>
+<% end %>

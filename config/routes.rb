@@ -31,8 +31,13 @@ Rails.application.routes.draw do
   get 'members/:id', to: 'members#show', as: 'member'
 
   resources :members do
-    resources :concerns, only: [:index, :new, :create, :edit, :update, :destroy, :update]
+    resources :concerns, only: [:index, :new, :create, :edit, :update, :destroy] do
+      get 'sort_by_title', on: :collection
+      get 'sort_by_time', on: :collection
+      get 'sort_by_status', on: :collection
+    end
   end
+  
   
 
   devise_for :members, controllers: { omniauth_callbacks: 'members/omniauth_callbacks' }

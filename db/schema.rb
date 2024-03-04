@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_12_232830) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_28_200713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_12_232830) do
     t.datetime "updated_at", null: false
     t.bigint "member_id", null: false
     t.string "title"
+    t.string "status"
     t.index ["member_id"], name: "index_concerns_on_member_id"
   end
 
@@ -61,6 +62,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_12_232830) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "members", force: :cascade do |t|
@@ -73,6 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_12_232830) do
     t.date "date_left"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_on_mailing_list", default: false
     t.index ["email"], name: "index_members_on_email", unique: true
   end
 
