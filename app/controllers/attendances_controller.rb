@@ -43,7 +43,7 @@ class AttendancesController < ApplicationController
 
   def destroy
     @attendance.destroy
-    flash[:notice] = "Attendance successfully destoyed"
+    flash[:notice] = "Attendance successfully destroyed"
     redirect_to attendances_path
   end
 
