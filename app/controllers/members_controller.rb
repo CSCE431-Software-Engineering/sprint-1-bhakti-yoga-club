@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
 
-  before_action :require_admin, except: [:index, :show, :destroy]   # See 'require_admin' in 'app/controllers/application_controller.rb'
-  before_action :authorize_member_or_admin, only: [:show]   # See 'authorize_member_or_admin' under private functions
+  before_action :require_admin, except: [:index, :show, :destroy, :edit, :update]   # See 'require_admin' in 'app/controllers/application_controller.rb'
+  before_action :authorize_member_or_admin, only: [:show, :edit, :update]   # See 'authorize_member_or_admin' under private functions
   before_action :index_authorize, only: [:index]
 
   def index
@@ -42,7 +42,7 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
     if @member.update(member_update_params)
       flash[:success] = "Member successfully updated"
-      redirect_to members_path
+      redirect_to member_path(@member)
     else
       flash[:alert] = "Member update failed"
       redirect_to edit_member_path(@member)
@@ -74,7 +74,8 @@ class MembersController < ApplicationController
       :email,
       :title,
       :is_active_paid_member,
-      :is_admin
+      :is_admin,
+      :is_on_mailing_list
       )
   end
 

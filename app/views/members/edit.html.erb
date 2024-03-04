@@ -3,22 +3,30 @@
 
   <%= form_with(model: @member, url: update_member_path(@member), method: :patch) do |form| %>
     <p>
+      <!-- basic uneditable info -->
       <strong>Email:</strong>
       <%= @member.email %><br />
       <strong>Name:</strong>
       <%= @member.full_name %><br />
-      <strong>Title:</strong>
-      <%= form.text_field(:title) %><br />
-      <strong>Paid Status:</strong>
-      <%= form.check_box(:is_active_paid_member) %><br />
-      <strong>Admin Status:</strong>
-      <%= form.check_box(:is_admin) %><br />
+
+      <!-- personal/admin access edit -->
       <strong>Is On Mailing List:</strong>
       <%= form.check_box(:is_on_mailing_list)%><br />
+
+      <!-- Admin only edit -->
+      <% if current_member.is_admin? && session[:admin_view] %>
+        <strong>Title:</strong>
+        <%= form.text_field(:title) %><br />
+        <strong>Paid Status:</strong>
+        <%= form.check_box(:is_active_paid_member) %><br />
+        <strong>Admin Status:</strong>
+        <%= form.check_box(:is_admin) %><br />
+      <% end %>
+      
     </p>
 
     <div class="form-buttons">
-      <%= form.submit("Update Member") %>
+      <%= form.submit("Update Information") %>
     </div>
   <% end %>
 

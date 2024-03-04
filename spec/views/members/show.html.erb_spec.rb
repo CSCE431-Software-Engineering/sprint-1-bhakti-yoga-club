@@ -32,6 +32,7 @@ RSpec.describe "members/show.html.erb", type: :view do
       expect(rendered).to have_text("Email:")
       expect(rendered).to have_text("Date Joined:")
       expect(rendered).to have_text("Paid Status:")
+      expect(rendered).to have_text("On Mailing List:")
     end
 
     it "displays that member's name, email, join date, and paid status" do
@@ -40,6 +41,7 @@ RSpec.describe "members/show.html.erb", type: :view do
       expect(rendered).to have_text(normal_member.email)
       expect(rendered).to have_text(normal_member.date_joined)
       expect(rendered).to have_text(normal_member.is_active_paid_member)
+      expect(rendered).to have_text(normal_member.is_on_mailing_list)
     end
 
     it "does not display the admin-specific categories" do
@@ -68,6 +70,7 @@ RSpec.describe "members/show.html.erb", type: :view do
       expect(rendered).to have_text("Email:")
       expect(rendered).to have_text("Date Joined:")
       expect(rendered).to have_text("Paid Status:")
+      expect(rendered).to have_text("On Mailing List:")
     end
 
     it "displays that member's name, email, join date, and paid status" do
@@ -76,6 +79,7 @@ RSpec.describe "members/show.html.erb", type: :view do
       expect(rendered).to have_text(admin_member.email)
       expect(rendered).to have_text(admin_member.date_joined)
       expect(rendered).to have_text(admin_member.is_active_paid_member)
+      expect(rendered).to have_text(normal_member.is_on_mailing_list)
     end
 
     it "does not display the admin-specific categories" do
@@ -106,6 +110,7 @@ RSpec.describe "members/show.html.erb", type: :view do
       expect(rendered).to have_text("Member Title:")
       expect(rendered).to have_text("Date Left:")
       expect(rendered).to have_text("Paid Status:")
+      expect(rendered).to have_text("On Mailing List:")
     end
 
     it "displays that member's name, email, join date, and paid status" do
@@ -116,6 +121,7 @@ RSpec.describe "members/show.html.erb", type: :view do
       expect(rendered).to have_text(admin_member.title)
       expect(rendered).to have_text(admin_member.date_left)
       expect(rendered).to have_text(admin_member.is_active_paid_member)
+      expect(rendered).to have_text(normal_member.is_on_mailing_list)
     end
 
     # Add more tests for other content or elements on the page
