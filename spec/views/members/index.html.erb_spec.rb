@@ -60,6 +60,7 @@ RSpec.describe "members/index.html.erb", type: :view do
       render
       expect(rendered).to have_selector("th.email", text: "Email")
       expect(rendered).to have_selector("th.left-date", text: "Date Left")
+      expect(rendered).to have_selector("th.mailing-status", text: "Mailing List")
       expect(rendered).to have_selector("th.paid-status", text: "Paid Member Status")
       expect(rendered).to have_selector("th.admin-status", text: "Admin Status")
       expect(rendered).to have_selector("th.member-actions", text: "Member Actions")

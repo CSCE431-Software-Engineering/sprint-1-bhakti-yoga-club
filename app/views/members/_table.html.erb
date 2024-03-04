@@ -11,6 +11,7 @@
           <th class="email">Email</th>
           <th class="join-date">Join Date</th>
           <th class="left-date">Date Left</th>
+          <th class="mailing-status">Mailing List</th>
           <th class="paid-status">Paid Member Status</th>
           <th class="admin-status">Admin Status</th>
           <th class="member-actions">Member Actions</th>
@@ -23,6 +24,7 @@
             <td class="email"><%= member.email %></td>
             <td class="join-date"><%= member.date_joined %></td>
             <td class="left-date"><%= member.date_left %></td>
+            <td class="mailing-status"><%= member.is_on_mailing_list %></td>
             <td class="paid-status"><%= member.is_active_paid_member %></td>
             <td class="admin-status"><%= member.is_admin %></td>
             <td class="member-actions">

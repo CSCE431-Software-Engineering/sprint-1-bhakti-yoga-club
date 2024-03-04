@@ -21,3 +21,5 @@
 <% if current_member.is_admin? %>
   <%= link_to "Back to Members", members_path %>
 <% end %>
+
+<%= link_to "Edit Information", edit_member_path(@member) %>
