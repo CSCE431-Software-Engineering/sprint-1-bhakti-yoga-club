@@ -1,7 +1,7 @@
 # app/controllers/announcements_controller.rb
 class AnnouncementsController < ApplicationController
 
-  before_action :authenticate_member!, except: [:index, :show]
+  before_action :authenticate_member!, except: [:index, :show]                # see 'authenticate_member' in 'app/controllers/application_controller.rb'
   before_action :set_announcement, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -20,19 +20,24 @@ class AnnouncementsController < ApplicationController
 
 
   def create
-      @announcement = Announcement.new(announcement_params)
+    @announcement = Announcement.new(announcement_params)
 
-      @announcement.member_id = current_member.id
-      @announcement.message_date = Time.current.in_time_zone('Central Time (US & Canada)')
+    @announcement.member_id = current_member.id
+    @announcement.message_date = Time.current.in_time_zone('Central Time (US & Canada)')
 
-      respond_to do |format|
-          if @announcement.save
-            format.html { redirect_to announcements_path, notice: 'Announcement created successfully!'}
-          else
-            Rails.logger.debug @announcement.errors.full_messages.join(', ')
-            format.html { render :new, status: :unprocessable_entity, flash: { error: @announcement.errors.full_messages.join(', ') } }
-          end
+    respond_to do |format|
+      if @announcement.save
+
+        Member.where(is_on_mailing_list: true).each do |member|
+          AnnouncementMailer.send_announcement_email(member, @announcement).deliver_now
+        end
+
+        format.html { redirect_to announcements_path, notice: 'Announcement created successfully!'}
+      else
+        Rails.logger.debug @announcement.errors.full_messages.join(', ')
+        format.html { render :new, status: :unprocessable_entity, flash: { error: @announcement.errors.full_messages.join(', ') } }
       end
+    end
   end
 
   
@@ -50,10 +55,8 @@ class AnnouncementsController < ApplicationController
   
   def destroy
     @announcement.destroy
-  
-    respond_to do |format|
-      format.html { redirect_to announcements_path, notice: 'Announcement was successfully destroyed.' }
-    end
+
+    redirect_to announcements_path, notice: 'Announcement was successfully destroyed.'
   end
 
   private

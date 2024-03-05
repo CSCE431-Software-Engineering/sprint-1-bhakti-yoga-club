@@ -6,6 +6,20 @@ require "active_support/core_ext/integer/time"
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.default_url_options = { host: 'byc-customer-6cdc2171ca01.herokuapp.com' }
+
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'gmail.com',
+    user_name: 'byc.notifs@gmail.com',
+    password: 'zttogwclueyxwtdx',
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
+  config.action_mailer.raise_delivery_errors = true
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Turn false under Spring and add config.action_view.cache_template_loading = true.
@@ -57,4 +71,8 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+  
+  ENV['GOOGLE_OAUTH_CLIENT_ID'] = '760569690703-5mlrk5b6rp248diadkspfba245ebfg14.apps.googleusercontent.com'
+  ENV['GOOGLE_OAUTH_CLIENT_SECRET'] = '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'
+  config.middleware.use Warden::Manager
 end

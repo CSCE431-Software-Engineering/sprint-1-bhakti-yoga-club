@@ -1,42 +1,37 @@
 <!-- app/views/attendances/new.html.erb -->
-<h1>New Attendance Item</h1>
 
-<%= form_with(model: @attendance, url: attendances_path, method: :post) do |form| %>
-  <div>
-    <%= form.label :Member %>
-  </div>
-  <br>
-  <div>
-    <%= form.text_field :member_id, placeholder: 'Add Member\'s ID' %>
-  </div>
-  <br>
-  <div>
-    <%= form.label :Event %>
-  </div>
-  <br>
-  <div>
-    <%= form.text_field :event_id, placeholder: 'Add Event\'s ID' %>
-  </div>
-  <br>
-  <div>
-    <%= form.label :Arrival %>
-  </div>
-  <br>
-  <div>
-    <%= form.text_field :time_arrived, placeholder: 'Add Time of Arrival' %>
-  </div>
-  <br>
-  <div>
-    <%= form.label :Departure %>
-  </div>
-  <br>
-  <div>
-    <%= form.text_field :time_departed, placeholder: 'Add Time of Departure' %>
-  </div>
-  <br>
-  <div>
-    <%= form.submit 'Create' %>
-    <br><br>
-    <%= link_to 'Cancel', attendances_path %>
-  </div>
+<% if member_signed_in? %>
+  <h1>New Attendance Item</h1>
+
+  <%= form_with(model: @attendance, url: attendances_path, method: :post) do |form| %>
+    <div>
+      <%= form.label :Event %>
+    </div>
+    <br>
+    <div>
+      <%= form.text_field :event_id, placeholder: 'Add Event\'s ID' %>
+    </div>
+    <br>
+    <div>
+      <%= form.label :Estimated_Arrival_Time %>
+    </div>
+    <br>
+    <div>
+      <%= form.datetime_local_field :time_arrived %>
+    </div>
+    <br>
+    <div>
+      <%= form.label :Estimated_Departure_Time %>
+    </div>
+    <br>
+    <div>
+      <%= form.datetime_local_field :time_departed %>
+    </div>
+    <br>
+    <div>
+      <%= form.submit 'Create' %>
+      <br><br>
+      <%= link_to 'Cancel', attendances_path %>
+    </div>
+  <% end %>
 <% end %>
