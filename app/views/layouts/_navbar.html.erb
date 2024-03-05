@@ -14,6 +14,11 @@
     <!-- User Actions Links -->
     <ul class="navbar_nav">
       <% if member_signed_in? %>
+        <% if current_member.is_admin? && session[:admin_view] %>
+          <li><%= link_to "Switch to Member View", toggle_view_path, method: :post, class: "btn btn-primary" %></li>
+        <% elsif current_member.is_admin? && !session[:admin_view]%>
+          <li><%= link_to "Switch to Admin View", toggle_view_path, method: :post, class: "btn btn-primary" %></li>
+        <% end %>
         <li><%= link_to "My Profile", member_path(current_member) %></li>
         <li class="navbar_signin"><%= button_to "Sign Out", destroy_member_session_path, method: :delete, class: "btn btn-danger" %></li>
       <% else %>

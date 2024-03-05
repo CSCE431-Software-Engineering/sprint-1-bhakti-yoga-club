@@ -1,7 +1,8 @@
 class MembersController < ApplicationController
 
-  before_action :require_admin, except: [:show, :destroy]
-  before_action :authorize_member_or_admin, only: [:show]
+  before_action :require_admin, except: [:index, :show, :destroy, :edit, :update]   # See 'require_admin' in 'app/controllers/application_controller.rb'
+  before_action :authorize_member_or_admin, only: [:show, :edit, :update]   # See 'authorize_member_or_admin' under private functions
+  before_action :index_authorize, only: [:index]
 
   def index
     @members = Member.order(email: :asc)
@@ -18,6 +19,10 @@ class MembersController < ApplicationController
   def create
     @member = Member.new(member_params)
     @member.date_joined = Date.today
+
+    if @member.email == nil
+      redirect_to new_member_path(email: @member.email)
+    end
 
     existing_member = Member.find_by(email: @member.email)
 
@@ -41,7 +46,7 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
     if @member.update(member_update_params)
       flash[:success] = "Member successfully updated"
-      redirect_to members_path
+      redirect_to member_path(@member)
     else
       flash[:alert] = "Member update failed"
       redirect_to edit_member_path(@member)
@@ -53,21 +58,39 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    # @member = Member.find(params[:id])
-    # if @member.destroy
-    #   flash[:notice] = "Member deleted successfully"
-    # else
-    #   flash[:notice] = "Member could not be deleted"
-    # end
-    # redirect_to members_path
     if current_member
-      sign_out current_member
-      flash[:notice] = "You have been signed out."
+      if current_member.is_admin?
+        if (params[:id] != "sign_out")
+          @member = Member.find(params[:id])
+          if @member != current_member
+            @member.destroy
+            flash[:notice] = "Member deleted"
+          else
+            flash[:notice] = "You cannot delete yourself."
+          end
+        else
+          sign_out current_member
+          flash[:notice] = "You have been signed out"
+        end
+      else
+        sign_out current_member
+        flash[:notice] = "You have been signed out"
+      end
     else
-      flash[:alert] = "You are not signed in"
+      flash[:alert] = "You are not signed in."
     end
     redirect_to root_path
   end
+
+  # def destroy
+  #   if current_member
+  #     sign_out current_member
+  #     flash[:notice] = "You have been signed out."
+  #   else
+  #     flash[:alert] = "You are not signed in"
+  #   end
+  #   redirect_to root_path
+  # end
 
   private
 
@@ -80,10 +103,12 @@ class MembersController < ApplicationController
       :email,
       :title,
       :is_active_paid_member,
-      :is_admin
+      :is_admin,
+      :is_on_mailing_list
       )
   end
 
+  # Function that determines whether a user should be able to view their personal member data. (Access only to admins and that member)
   def authorize_member_or_admin
     @member = Member.find(params[:id])
     unless current_member == @member || current_member&.is_admin?
@@ -92,4 +117,10 @@ class MembersController < ApplicationController
     end
   end
 
+  def index_authorize
+    unless member_signed_in?
+      flash[:alert] = "You are not authorized to access this page."
+      redirect_to root_path
+    end
+  end
 end
