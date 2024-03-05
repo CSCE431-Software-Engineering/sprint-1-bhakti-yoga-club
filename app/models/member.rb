@@ -1,6 +1,7 @@
 class Member < ApplicationRecord
 
 	devise :omniauthable, omniauth_providers: [:google_oauth2]
+  validates :email, presence: true
 
 	# validates_email_format_of :email, message: "is not valid"
 

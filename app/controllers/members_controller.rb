@@ -20,6 +20,10 @@ class MembersController < ApplicationController
     @member = Member.new(member_params)
     @member.date_joined = Date.today
 
+    if @member.email == nil
+      redirect_to new_member_path(email: @member.email)
+    end
+
     existing_member = Member.find_by(email: @member.email)
 
     if existing_member 
@@ -55,13 +59,38 @@ class MembersController < ApplicationController
 
   def destroy
     if current_member
-      sign_out current_member
-      flash[:notice] = "You have been signed out."
+      if current_member.is_admin?
+        if (params[:id] != "sign_out")
+          @member = Member.find(params[:id])
+          if @member != current_member
+            @member.destroy
+            flash[:notice] = "Member deleted"
+          else
+            flash[:notice] = "You cannot delete yourself."
+          end
+        else
+          sign_out current_member
+          flash[:notice] = "You have been signed out"
+        end
+      else
+        sign_out current_member
+        flash[:notice] = "You have been signed out"
+      end
     else
-      flash[:alert] = "You are not signed in"
+      flash[:alert] = "You are not signed in."
     end
     redirect_to root_path
   end
+
+  # def destroy
+  #   if current_member
+  #     sign_out current_member
+  #     flash[:notice] = "You have been signed out."
+  #   else
+  #     flash[:alert] = "You are not signed in"
+  #   end
+  #   redirect_to root_path
+  # end
 
   private
 
