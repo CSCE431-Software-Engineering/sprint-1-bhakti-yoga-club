@@ -3,8 +3,11 @@ require 'rails_helper'
 RSpec.describe MembersController, type: :controller do
   include Devise::Test::ControllerHelpers # Include Devise test helpers
 
-  let(:member) { Member.create(full_name: "Admin User", email: "admin@example.com", date_joined: Date.today) }
-  let(:member2) { Member.create(email: "test2@example.com") }
+  let!(:existing_member) { Member.find_by(email: "admin@example.com") || Member.create(full_name: "Admin User", email: "admin@example.com", date_joined: Date.today) }
+  let(:member) { existing_member }
+
+  let!(:existing_member2) { Member.find_by(email: "test2@example.com") || Member.create(email: "test2@example.com")}
+  let(:member2) { existing_member2 }
 
   before do
     @request.env['devise.mapping'] = Devise.mappings[:member]
@@ -21,7 +24,8 @@ RSpec.describe MembersController, type: :controller do
   end
 
   describe "GET #show" do
-    let(:member) { Member.create(email: "test@example.com") }
+    let(:existing_member) { Member.find_by(email: "test@example.com") || Member.create(email: "test@example.com") }
+
 
     it "returns a successful response" do
       get :show, params: { id: member.id }
@@ -39,7 +43,7 @@ RSpec.describe MembersController, type: :controller do
   describe "POST #create" do
     context "with valid attributes" do
       it "creates a new member" do
-        valid_attributes = { email: "test@example.com" } # Define valid attributes manually
+        valid_attributes = { email: "test_create@example.com" } # Define valid attributes manually
         expect {
           post :create, params: { member: valid_attributes }
         }.to change(Member, :count).by(1)
@@ -57,14 +61,13 @@ RSpec.describe MembersController, type: :controller do
 
   describe "GET #edit" do
     it "returns a successful response" do
-      member = Member.create(email: "test@example.com")
-      get :edit, params: { id: member.id }
+      get :edit, params: { id: existing_member.id }
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "PUT #update" do
-    let(:member) { Member.create(email: "test@example.com") }
+    let(:existing_member) { Member.find_by(email: "test@example.com") || Member.create(email: "test@example.com") }
 
     context "with valid attributes" do
       it "updates the member" do
@@ -85,8 +88,7 @@ RSpec.describe MembersController, type: :controller do
 
   describe "GET #delete" do
     it "assigns the requested member to @member" do
-      member_test5 = Member.create(email: "member_test5@example.com")
-      get :delete, params: { id: member_test5.id }
+      get :delete, params: { id: existing_member.id }
       expect(assigns(:member)).to eq(member_test5)
     end
 
@@ -100,6 +102,7 @@ RSpec.describe MembersController, type: :controller do
   describe "DELETE #destroy" do
     context "as an admin" do
       it "destroys another member" do
+        
         member_test2 = Member.create(email: "member_test2@example.com")
         expect {
           delete :destroy, params: { id: member_test2.id }

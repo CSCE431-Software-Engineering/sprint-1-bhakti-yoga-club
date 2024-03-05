@@ -1,206 +1,160 @@
-# spec/controllers/attendances_controller_spec.rb
 require 'rails_helper'
 
 RSpec.describe AttendancesController, type: :controller do
-  describe '#set_attendance' do
-    controller do
-      before_action :set_attendance, only: [:show, :edit, :update, :destroy]
+
+  let(:event) { Event.create!(
+    name: "Sample Event",
+    start_time: DateTime.now,
+    end_time: DateTime.now + 1.hour, 
+    location: 'Sample Location'
+    ) 
+  }
+
+  let(:member) {
+    Member.create(
+      email: 'hld7dp@tamu.edu',
+      full_name: 'Steven Luo',
+      title: 'DefaultMember',
+      is_active_paid_member: false,
+      is_admin: true,
+      date_joined: '2024-02-12',
+      created_at: '2024-02-12 20:02:30.814754',
+      updated_at: '2024-02-12 20:02:30.814754',
+      is_on_mailing_list: true
+    )
+  }
+
+
+
+  let(:valid_attributes) do
+    {
+      member_id: member.id, 
+      event_id: event.id,  
+      time_arrived: Time.now,
+      time_departed: Time.now + 1.hour
+    }
+  end
+
+  let(:invalid_attributes) do
+    {
+      member_id: nil,
+      event_id: nil,
+      time_arrived: nil,
+      time_departed: nil
+    }
+  end
+
+  describe "GET #index" do
+    it "returns a successful response" do
+      get :index
+      expect(response).to have_http_status(:success)
     end
 
-    context 'when params[:id] is present' do
-      it 'assigns the correct attendance' do
+    it "assigns all attendances as @attendances" do
+      attendance = Attendance.create!(valid_attributes)
+      get :index
+      expect(assigns(:attendance)).to eq([attendance])
+    end
+  end
 
-        event = Event.create(
-          name: 'Test event',
-          created_at: Time.current,
-          updated_at: Time.current
-        )
+  describe "GET #new" do
+    it "returns a successful response" do
+      get :new
+      expect(response).to have_http_status(:success)
+    end
 
+    it "assigns a new attendance as @attendance" do
+      get :new
+      expect(assigns(:attendance)).to be_a_new(Attendance)
+    end
+  end
 
-        # Create an example attendance in the database
-        attendance = Attendance.create(
-          event_id: event.id, 
-          time_arrived: Time.current, 
-          time_departed: Time.current
-        )
+  describe "POST #create" do
+    context "with valid attributes" do
+      it "creates a new attendance" do
+        expect {
+          post :create, params: { attendance: valid_attributes }
+        }.to change(Attendance, :count).by(1)
+      end
 
-        # Manually set the params to include the correct attendance id
-        controller.params[:id] = attendance.id
-
-        # Call the set_attendance method directly
-        controller.send(:set_attendance)
-
-        # Expect that the @attendance instance variable is assigned correctly
-        expect(assigns(:attendance)).to eq(attendance)
+      it "redirects to the attendances_path" do
+        post :create, params: { attendance: valid_attributes }
+        expect(response).to redirect_to(attendances_path)
       end
     end
 
-    context 'when params[:id] is not present' do
-      it 'does not raise ActiveRecord::RecordNotFound' do
-        # Call the set_attendance method directly without setting params[:id]
-        expect { controller.send(:set_attendance) }.not_to raise_error
+    context "with invalid attributes" do
+      it "does not create a new attendance" do
+        expect {
+          post :create, params: { attendance: invalid_attributes }
+        }.not_to change(Attendance, :count)
       end
 
-      it 'does not assign @attendance' do
-        # Call the set_attendance method directly without setting params[:id]
-        controller.send(:set_attendance)
-
-        # Expect that @attendance is not assigned
-        expect(assigns(:attendance)).to be_nil
+      it "renders the new template with flash error message" do
+        post :create, params: { attendance: invalid_attributes }
+        expect(response).to render_template(:new)
+        expect(flash[:error]).not_to be_nil
       end
     end
   end
 
+  describe "GET #edit" do
+    let(:attendance) { Attendance.create!(valid_attributes) }
 
-  describe '#attendance_params' do
-    let(:current_time) { Time.current }
-
-    let(:valid_params) do
-      {
-        attendance: {
-          member_id: 1,
-          event_id: 1,
-          time_arrived: current_time, 
-          time_departed: current_time
-        }
-      }
+    it "returns a successful response" do
+      get :edit, params: { id: attendance.id }
+      expect(response).to have_http_status(:success)
     end
 
-    it 'permits valid parameters' do
-      controller.params = valid_params
-      expect(controller.send(:attendance_params).to_h).to eq(
-        'member_id' => 1,
-        'event_id' => 1,
-        'time_arrived' => current_time,
-        'time_departed' => current_time
-      )
+    it "assigns the requested attendance as @attendance" do
+      get :edit, params: { id: attendance.id }
+      expect(assigns(:attendance)).to eq(attendance)
     end
   end
 
-  describe 'DELETE #destroy' do
+  describe "PUT #update" do
+    let(:attendance) { Attendance.create!(valid_attributes) }
 
-    event = Event.create(
-      name: 'Test event',
-      created_at: Time.current,
-      updated_at: Time.current
-    )
+    context "with valid attributes" do
+      it "updates the requested attendance" do
+        put :update, params: { id: attendance.id, attendance: { time_arrived: Time.now + 2.hours } }
+        attendance.reload
+        expect(attendance.time_arrived).to be_within(1.second).of(Time.now + 2.hours)
+      end
 
-    attendance = Attendance.create(
-      event_id: event.id, 
-      time_arrived: Time.current, 
-      time_departed: Time.current
-    )
+      it "redirects to the attendance_path" do
+        put :update, params: { id: attendance.id, attendance: valid_attributes }
+        expect(response).to redirect_to(attendance_path)
+      end
+    end
 
-    it 'destroys the attendance' do
+    context "with invalid attributes" do
+      it "does not update the requested attendance" do
+        put :update, params: { id: attendance.id, attendance: invalid_attributes }
+        attendance.reload
+        expect(attendance.time_arrived).not_to be_nil
+      end
+
+      it "renders the edit template with flash error message" do
+        put :update, params: { id: attendance.id, attendance: invalid_attributes }
+        expect(response).to render_template(:edit)
+        expect(flash[:error]).not_to be_nil
+      end
+    end
+  end
+
+  describe "DELETE #destroy" do
+    let!(:attendance) { Attendance.create!(valid_attributes) }
+
+    it "destroys the requested attendance" do
       expect {
         delete :destroy, params: { id: attendance.id }
       }.to change(Attendance, :count).by(-1)
     end
 
-
-  end
-
-  describe 'PATCH #update' do
-
-    event = Event.create(
-      name: 'Test event',
-      created_at: Time.current,
-      updated_at: Time.current
-    )
-
-    attendance = Attendance.create(
-      event_id: event.id, 
-      time_arrived: Time.current, 
-      time_departed: Time.current
-    )
-
-    context 'with valid parameters' do
-      let(:valid_params) do
-        {
-          attendance: {
-            event_id: event.id, 
-            time_arrived: Time.current, 
-            time_departed: nil
-          }
-        }
-      end
-
-      it 'updates the attendance' do
-        patch :update, params: { id: attendance.id, attendance: valid_params[:attendance] }
-      end
-
-    end
-
-    context 'with invalid parameters' do
-      let(:invalid_params) do
-        {
-          attendance: {
-            member_id: nil, # invalid member id
-            event_id: event.id,
-            time_arrived: Time.current,
-            time_departed: Time.current
-          }
-        }
-      end
-
-      it 'does not update the attendance' do
-        patch :update, params: { id: attendance.id, attendance: invalid_params[:attendance] }
-      end
-
-
+    it "redirects to the attendances_path" do
+      delete :destroy, params: { id: attendance.id }
+      expect(response).to redirect_to(attendances_path)
     end
   end
-
-
-  describe 'POST #create' do
-
-    context 'with valid parameters' do
-
-      it 'creates a new attendance' do
-        eventa = Event.create(
-          name: 'Test event 2',
-          created_at: Time.current,
-          updated_at: Time.current
-        )
-
-        attendance_params = {
-          event_id: eventa.id,
-          time_arrived: Time.current,
-          time_departed: Time.current
-        }
-
-
-        expect do
-          post :create, params: { attendance: attendance_params }
-        end.to change(Attendance, :count).by(1)
-
-      end
-    end
-
-    context 'with invalid parameters' do
-      event = Event.create(
-        name: 'Test event',
-        created_at: Time.current,
-        updated_at: Time.current
-      )
-
-      let(:invalid_params) do
-        {
-          attendance: {
-            member_id: 1,
-            event_id: nil, #invalid event id
-            time_arrived: Time.current,
-            time_departed: Time.current
-          }
-        }
-      end
-
-      it 'does not create a new attendance' do
-        expect {
-          post :create, params: invalid_params
-        }.not_to change(Attendance, :count)
-      end
-
-    end
-  end  
 end
