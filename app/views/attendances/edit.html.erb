@@ -1,0 +1,35 @@
+<!-- app/views/attendances/edit.html.erb -->
+<% if current_member.is_admin? || current_member.id == @attendance.member_id %>
+
+  <h1>Edit Attendance Item</h1>
+
+  <%= form_with(model: @attendance, url: attendance_path(@attendance), method: :patch) do |form| %>
+    <div>
+      <%= form.label :Event %>
+    </div>
+    <div>
+      <%= form.text_field :event_id, placeholder: 'Enter Event\'s ID' %>
+    </div>
+
+    <div>
+      <%= form.label :Estimated_Arrival_Time %>
+    </div>
+    <div>
+      <%= form.datetime_local_field :time_arrived, placeholder: 'Enter Time of Arrival' %>
+    </div>
+
+    <div>
+      <%= form.label :Estimated_Departure_Time %>
+    </div>
+    <div>
+      <%= form.datetime_local_field :time_departed, placeholder: 'Enter Time of Departure' %>
+    </div>
+
+    <div>
+      <%= form.submit 'Update Attendance Item' %>
+    </div>
+
+    <%= link_to 'Back', attendances_path, class: 'btn btn-secondary' %>
+  <% end %>
+
+<% end %>

@@ -11,6 +11,14 @@ Rails.application.routes.draw do
   patch 'announcements/:id', to: 'announcements#update', as: 'update_announcement'
   delete 'announcements/:id', to: 'announcements#destroy', as: 'delete_announcement'
 
+  get 'attendances', to: 'attendances#index', as: 'attendances'
+  get 'attendances/new', to: 'attendances#new', as: 'new_attendance'
+  get 'attendances/:id', to: 'attendances#show', as: 'attendance'
+  post 'attendances', to: 'attendances#create'
+  get 'attendances/:id/edit', to: 'attendances#edit', as: 'edit_attendance'
+  patch 'attendances/:id', to: 'attendances#update', as: 'update_attendance'
+  delete 'attendances/:id', to: 'attendances#destroy', as: 'delete_attendance'
+
   resources :events
 
   get 'members', to: 'members#index', as: 'members'
@@ -21,6 +29,16 @@ Rails.application.routes.draw do
   get 'members/:id/delete', to: 'members#delete', as: 'confirm_delete_member'
   delete 'members/:id', to: 'members#destroy', as: 'delete_member'
   get 'members/:id', to: 'members#show', as: 'member'
+
+  resources :members do
+    resources :concerns, only: [:index, :new, :create, :edit, :update, :destroy] do
+      get 'sort_by_title', on: :collection
+      get 'sort_by_time', on: :collection
+      get 'sort_by_status', on: :collection
+    end
+  end
+  
+  
 
   devise_for :members, controllers: { omniauth_callbacks: 'members/omniauth_callbacks' }
   devise_scope :member do

@@ -1,0 +1,44 @@
+<!-- app/views/attendances/index.html.erb -->
+<%= link_to 'Back', root_path %>
+
+<% if member_signed_in? %>
+
+  <h1>Event Sign-Up</h1>
+
+  <%= link_to 'Make Attendance Item', new_attendance_path %>
+
+
+  <br><br><br><br>
+  <h2>Your Attendance Log by Event</h2>
+  <ul>
+    <% @attendance.each do |attendance| %>
+      <% if current_member.id == attendance.member_id %>
+        <li>
+          <%= link_to attendance.event_id, attendance_path(attendance) %>
+          <br><br>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
+
+
+<% if member_signed_in? && current_member.is_admin? %>
+  <br><br><br><br>
+  <h2>Overall Attendance Log by Event</h2>
+  <ul>
+    <% @events.each do |event| %>
+      <h3> <%= event.name %> </h3>
+
+        <% @attendance.each do |attendance| %>
+          <% if attendance.event_id == event.id %>
+            <li>
+              <%= link_to attendance.member_id, attendance_path(attendance) %>
+              <br><br>
+            </li>
+          <% end %>
+        <% end %>
+
+    <% end %>
+  </ul>
+<% end %>

@@ -50,6 +50,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_28_200713) do
     t.boolean "is_read"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "member_id", null: false
+    t.string "title"
+    t.string "status"
+    t.index ["member_id"], name: "index_concerns_on_member_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -58,6 +62,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_28_200713) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "members", force: :cascade do |t|
@@ -77,4 +83,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_28_200713) do
   add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "members"
   add_foreign_key "budget_items", "events"
+  add_foreign_key "concerns", "members"
 end
