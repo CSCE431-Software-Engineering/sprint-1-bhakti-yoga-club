@@ -35,6 +35,14 @@
     width: auto;
   }
 
+  .asc-sort::after {
+    content: "▲";
+  }
+
+  .desc-sort::after {
+    content: "▼";
+  }
+
 </style>
 
 <h1>Members List</h1>
@@ -42,5 +50,3 @@
 <%= render 'members/table' %>
 
 <br />
-
-<%= link_to 'Back to Home', root_path %>

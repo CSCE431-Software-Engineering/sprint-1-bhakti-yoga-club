@@ -1,80 +1,64 @@
-<% if current_member.is_admin? && session[:admin_view] %>
+<!-- Additional check for if user is admin, in case of possible viewing of page without admin access -->
+<% if current_member.is_admin? %>
 
-  <% if session[:admin_view] %>
-
-    <!-- ADMIN TABLE -->
-
-    <table>
-      <thead>
-        <tr>
-          <th class="name">Name</th>
-          <th class="email">Email</th>
-          <th class="join-date">Join Date</th>
-          <th class="left-date">Date Left</th>
-          <th class="mailing-status">Mailing List</th>
-          <th class="paid-status">Paid Member Status</th>
-          <th class="admin-status">Admin Status</th>
-          <th class="member-actions">Member Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @members.each do |member| %>
-          <tr>
-            <td class="name"><%= member.full_name %></td>
-            <td class="email"><%= member.email %></td>
-            <td class="join-date"><%= member.date_joined %></td>
-            <td class="left-date"><%= member.date_left %></td>
-            <td class="mailing-status"><%= member.is_on_mailing_list %></td>
-            <td class="paid-status"><%= member.is_active_paid_member %></td>
-            <td class="admin-status"><%= member.is_admin %></td>
-            <td class="member-actions">
-              <%= link_to 'Show', member_path(member) %>
-              <%= link_to 'Edit', edit_member_path(member) %>
-              </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-
-  <% else %>
-
-    <!-- ADMIN MEMBER TABLE -->
-
-    <table>
-      <thead>
-        <tr>
-          <th class="name">Name</th>
-          <th class="join-date">Join Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @members.each do |member| %>
-          <tr>
-            <td class="name"><%= member.full_name %></td>
-            <td class="join-date"><%= member.date_joined %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-
-  <% end %>
-
-<% else %>
-
-  <!-- MEMBER TABLE -->
-
+  <!--  DEPRECATED TABLE 
   <table>
     <thead>
       <tr>
         <th class="name">Name</th>
+        <th class="email">Email</th>
         <th class="join-date">Join Date</th>
+        <th class="left-date">Date Left</th>
+        <th class="mailing-status">Mailing List</th>
+        <th class="paid-status">Paid Member Status</th>
+        <th class="admin-status">Admin Status</th>
+        <th class="member-actions">Member Actions</th>
       </tr>
     </thead>
     <tbody>
       <% @members.each do |member| %>
         <tr>
           <td class="name"><%= member.full_name %></td>
+          <td class="email"><%= member.email %></td>
           <td class="join-date"><%= member.date_joined %></td>
+          <td class="left-date"><%= member.date_left %></td>
+          <td class="mailing-status"><%= member.is_on_mailing_list %></td>
+          <td class="paid-status"><%= member.is_active_paid_member %></td>
+          <td class="admin-status"><%= member.is_admin %></td>
+          <td class="member-actions">
+            <%= link_to 'Show', member_path(member) %>
+            <%= link_to 'Edit', edit_member_path(member) %>
+            </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  -->
+
+  <table>
+    <thead>
+      <% sortable_columns.each do |column| %>
+        <th>
+          <%= sortable column.titleize, column %>
+          <%= sort_direction_icon(column) if column == params[:sort_column] %>
+        </th>
+      <% end %>
+      <th>Member Actions</th>
+    </thead>
+    <tbody>
+      <% @members.each do |member| %>
+        <tr>
+          <td><%= member.full_name %></td>
+          <td><%= member.email %></td>
+          <td><%= member.date_joined %></td>
+          <td><%= member.date_left %></td>
+          <td><%= member.is_on_mailing_list %></td>
+          <td><%= member.is_active_paid_member %></td>
+          <td><%= member.is_admin %></td>
+          <td>
+            <%= link_to 'Show', member_path(member) %>
+            <%= link_to 'Edit', edit_member_path(member) %>
+          </td>
         </tr>
       <% end %>
     </tbody>

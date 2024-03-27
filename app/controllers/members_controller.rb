@@ -1,11 +1,25 @@
 class MembersController < ApplicationController
 
-  before_action :require_admin, except: [:index, :show, :destroy, :edit, :update]   # See 'require_admin' in 'app/controllers/application_controller.rb'
+  before_action :require_admin, except: [:show, :destroy, :edit, :update]   # See 'require_admin' in 'app/controllers/application_controller.rb'
   before_action :authorize_member_or_admin, only: [:show, :edit, :update]   # See 'authorize_member_or_admin' under private functions
   before_action :index_authorize, only: [:index]
 
   def index
-    @members = Member.order(email: :asc)
+    sort_column = params[:sort_column]
+    # Validate sort_column and sort_direction to prevent SQL injection
+    sort_direction = params[:sort_direction]
+    if params[:sort_column].present? && params[:sort_direction].present?
+      if sortable_columns.include?(sort_column) && %w[asc desc].include?(sort_direction)
+        @members = Member.order(Arel.sql("#{sort_column} #{sort_direction}"))
+      else
+        # Handle invalid sorting parameters
+        flash[:error] = "Invalid sorting parameters"
+        @members = Member.all # Or handle differently based on your application logic
+      end
+    else
+      @members = Member.order(email: :asc)
+    end
+
   end
 
   def show
@@ -123,4 +137,9 @@ class MembersController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def sortable_columns
+    ["full_name", "email", "date_joined", "date_left", "is_on_mailing_list", "is_active_paid_member", "is_admin"]
+  end
+  
 end
